@@ -29,7 +29,7 @@
       </div>
 
         <.live_component
-          module={RauversionWeb.EventsLive.EventTicketsComponent}
+          module={RauversionExtension.UI.EventsLive.EventTicketsComponent}
           id={:tickets_modal}
           action={:new}
           event={@event}
@@ -111,13 +111,13 @@
     <.live_component
       id="speakers"
       event={@event}
-      module={RauversionWeb.EventsLive.EventSpeakers}
+      module={RauversionExtension.UI.EventsLive.EventSpeakers}
     />
 
     <.live_component
       id="sponsors"
       event={@event}
-      module={RauversionWeb.EventsLive.EventSponsors}
+      module={RauversionExtension.UI.EventsLive.EventSponsors}
     />
 
     <section id="newsletter" aria-label="Newsletter">

@@ -1,5 +1,5 @@
-defmodule RauversionWeb.Live.EventsLive.Components.TicketsFormComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.Live.EventsLive.Components.TicketsFormComponent do
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.Events
 
   @impl true

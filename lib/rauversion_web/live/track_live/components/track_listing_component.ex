@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.TrackListingComponent do
+defmodule RauversionExtension.UI.TrackLive.TrackListingComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.{Tracks, Repo}
 
   @impl true
@@ -61,7 +61,7 @@ defmodule RauversionWeb.TrackLive.TrackListingComponent do
   def handle_event("delete-track", %{"id" => id}, socket) do
     track = Tracks.get_track!(id)
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, track.user_id) do
+    case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, track.user_id) do
       {:ok, socket} ->
         {:ok, _} = Tracks.delete_track(track)
         {:noreply, push_event(socket, "remove-item", %{id: "track-item-#{track.id}"})}

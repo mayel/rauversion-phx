@@ -1,8 +1,8 @@
-defmodule RauversionWeb.PlaylistLive.SharePlaylistComponent do
+defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def render(%{track: track} = assigns) do
     ~H"""

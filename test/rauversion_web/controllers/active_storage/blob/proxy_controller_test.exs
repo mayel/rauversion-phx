@@ -1,5 +1,5 @@
-defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
-  use RauversionWeb.ConnCase
+defmodule RauversionExtension.UI.ActiveStorage.Blobs.ProxyControllerTest do
+  use RauversionExtension.UI.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     blob = ActiveStorageTestHelpers.create_file_blob(filename: "text.md")
@@ -46,6 +46,6 @@ defmodule RauversionWeb.ActiveStorage.Blobs.ProxyControllerTest do
     range = ["bytes=5-9,13-17"]
     size = "1124062"
 
-    a = RauversionWeb.ActiveStorage.Blobs.ProxyController.parse_range(range)
+    a = RauversionExtension.UI.ActiveStorage.Blobs.ProxyController.parse_range(range)
   end
 end

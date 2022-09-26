@@ -1,5 +1,5 @@
-defmodule RauversionWeb.PlaylistLive.FormComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.PlaylistLive.FormComponent do
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Playlists
 

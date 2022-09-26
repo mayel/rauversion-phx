@@ -23,7 +23,7 @@
     <p class="alert"></p>
     <%= @inner_content %>
 
-    <%= live_render(@conn, RauversionWeb.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
+    <%= live_render(@conn, RauversionExtension.UI.TrackLive.Player, id: "global-main-player", session: %{}, sticky: true) %>
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -31,7 +31,7 @@
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
     -->
     <script
-      src={"https://maps.googleapis.com/maps/api/js?key=#{Application.get_env(:rauversion, :google_maps_key)}&callback=dispatchMapsEvent&libraries=places&v=weekly"}
+      src={"https://maps.googleapis.com/maps/api/js?key=#{Application.get_env(:rauversion_extension, :google_maps_key)}&callback=dispatchMapsEvent&libraries=places&v=weekly"}
       defer
     ></script>
 

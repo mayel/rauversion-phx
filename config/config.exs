@@ -7,50 +7,19 @@
 # General application configuration
 import Config
 
-config :rauversion,
+config :rauversion_extension,
   ecto_repos: [Rauversion.Repo]
 
-# Configures the endpoint
-config :rauversion, RauversionWeb.Endpoint,
-  url: [host: "localhost"],
-  render_errors: [view: RauversionWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Rauversion.PubSub,
-  live_view: [signing_salt: "WyVJIKVd"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :rauversion, Rauversion.Mailer, adapter: Swoosh.Adapters.Local
 
 # https://lokalise.com/blog/localization-of-phoenix-applications/
-config :rauversion, RauversionWeb.Gettext, locales: ~w(en es pt), default_locale: "en"
+config :rauversion_extension, RauversionExtension.UI.Gettext, locales: ~w(en es pt), default_locale: "en"
 
-config :ueberauth, Ueberauth,
-  providers: [
-    zoom: {Ueberauth.Strategy.Zoom, [ignores_csrf_attack: true]},
-    twitter: {Ueberauth.Strategy.Twitter, [ignores_csrf_attack: true]},
-    discord: {Ueberauth.Strategy.Discord, [ignores_csrf_attack: true]},
-    stripe: {Ueberauth.Strategy.Stripe, [ignores_csrf_attack: true]}
-    # facebook: { Ueberauth.Strategy.Facebook, [ opt1: "value", opts2: "value" ] },
-    # github: { Ueberauth.Strategy.Github, [ opt1: "value", opts2: "value" ] }
-  ]
 
 config :ex_cldr,
   default_locale: "en",
   default_backend: Rauversion.Cldr,
   json_library: Jason
 
-# data_dir: "./priv/cldr",
-# force_locale_download: Mix.env() == :prod
-
-# cacertfile: "path/to/cacertfile"
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -85,11 +54,11 @@ config :phoenix_meta_tags,
   title: "Rauversion",
   description:
     "Rauversion is an open source platforms to build communities of musicians, podcasters and listeners. Is a self-hosted streaming music service owned by the people that use it – musicians, indie labels, fans + developers.",
-  url: "https://rauversion.com",
+  url: "https://rauversion_extension.com",
   # image: "https://phoenix.meta.tags.default/logo.png",
   "og:text": "Rauversion"
 
-# config :rauversion, Oban,
+# config :rauversion_extension, Oban,
 #  repo: Rauversion.Repo,
 #  plugins: [Oban.Plugins.Pruner],
 #  queues: [default: 10]

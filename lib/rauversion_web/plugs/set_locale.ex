@@ -1,8 +1,8 @@
-defmodule RauversionWeb.Plugs.SetLocale do
+defmodule RauversionExtension.UI.Plugs.SetLocale do
   # 1
   import Plug.Conn
   # 2
-  @supported_locales Gettext.known_locales(RauversionWeb.Gettext)
+  @supported_locales Gettext.known_locales(RauversionExtension.UI.Gettext)
 
   # 3
   def init(_options), do: nil
@@ -10,7 +10,7 @@ defmodule RauversionWeb.Plugs.SetLocale do
 
   def call(%Plug.Conn{params: %{"locale" => locale}} = conn, _options)
       when locale in @supported_locales do
-    RauversionWeb.Gettext |> Gettext.put_locale(locale)
+    RauversionExtension.UI.Gettext |> Gettext.put_locale(locale)
 
     conn
     |> put_session(:locale, locale)
@@ -22,7 +22,7 @@ defmodule RauversionWeb.Plugs.SetLocale do
         conn
 
       locale ->
-        RauversionWeb.Gettext |> Gettext.put_locale(locale)
+        RauversionExtension.UI.Gettext |> Gettext.put_locale(locale)
 
         conn
         |> put_session(:locale, locale)

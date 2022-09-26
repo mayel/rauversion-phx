@@ -1,8 +1,8 @@
-defmodule RauversionWeb.PlaylistLive.SharePlaylistButtonComponent do
+defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistButtonComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   @impl true
   def update(assigns, socket) do
@@ -36,7 +36,7 @@ defmodule RauversionWeb.PlaylistLive.SharePlaylistButtonComponent do
         <.modal return_to={Routes.profile_index_path(@socket, :index, playlist.user.username)}>
           <.live_component
             id={"share-track-modal-#{@share_track.id}"}
-            module={RauversionWeb.PlaylistLive.SharePlaylistComponent}
+            module={RauversionExtension.UI.PlaylistLive.SharePlaylistComponent}
             track={@share_track}
           />
         </.modal>

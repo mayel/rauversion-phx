@@ -1,5 +1,5 @@
-defmodule RauversionWeb.HomeLive.Index do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.HomeLive.Index do
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.{Playlists, Tracks, Accounts, Repo}
@@ -28,7 +28,7 @@ defmodule RauversionWeb.HomeLive.Index do
     nil
   end
 
-  defp list_users(page, current_user = %Accounts.User{}) do
+  defp list_users(page, current_user = %{}) do
     Accounts.unfollowed_users(current_user)
     |> Repo.paginate(page: page, page_size: 5)
   end

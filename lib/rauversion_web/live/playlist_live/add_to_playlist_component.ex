@@ -1,8 +1,8 @@
-defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
+defmodule RauversionExtension.UI.PlaylistLive.AddToPlaylistComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def update(assigns, socket) do
     {
@@ -36,7 +36,7 @@ defmodule RauversionWeb.PlaylistLive.AddToPlaylistComponent do
       <%= if @action == "add" do %>
         <.modal close_handler={@myself}>
           <.live_component
-            module={RauversionWeb.PlaylistLive.FormComponent}
+            module={RauversionExtension.UI.PlaylistLive.FormComponent}
             id={:new}
             title={"@page_title"}
             action={:new}

@@ -1,5 +1,5 @@
-defmodule RauversionWeb.PlaylistLiveTest do
-  use RauversionWeb.ConnCase
+defmodule RauversionExtension.UI.PlaylistLiveTest do
+  use RauversionExtension.UI.Web.ConnCase
 
   import Phoenix.LiveViewTest
   import Rauversion.PlaylistsFixtures

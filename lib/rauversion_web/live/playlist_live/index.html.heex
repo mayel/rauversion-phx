@@ -3,7 +3,7 @@
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.playlist_index_path(@socket, :index)}>
     <.live_component
-      module={RauversionWeb.PlaylistLive.FormComponent}
+      module={RauversionExtension.UI.PlaylistLive.FormComponent}
       id={@playlist.id || :new}
       title={@page_title}
       action={@live_action}

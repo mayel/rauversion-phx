@@ -1,13 +1,13 @@
-defmodule RauversionWeb.TrackLive.Show do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.TrackLive.Show do
+  use RauversionExtension.UI.Web, :live_view
 
   alias Rauversion.{Tracks, Repo, Accounts}
-  alias RauversionWeb.TrackLive.Step
+  alias RauversionExtension.UI.TrackLive.Step
 
   @impl true
   def mount(_params, session, socket) do
     socket =
-      RauversionWeb.LiveHelpers.get_user_by_session(socket, session)
+      RauversionExtension.UI.LiveHelpers.get_user_by_session(socket, session)
       |> assign(:share_track, nil)
 
     {:ok, socket}
@@ -32,7 +32,7 @@ defmodule RauversionWeb.TrackLive.Show do
   def handle_params(
         %{"id" => id} = _params,
         _,
-        socket = %{assigns: %{live_action: :show, current_user: user = %Accounts.User{}}}
+        socket = %{assigns: %{live_action: :show, current_user: user = %{}}}
       ) do
     track =
       Tracks.get_track_query(id)
@@ -68,7 +68,7 @@ defmodule RauversionWeb.TrackLive.Show do
       |> assign(:current_tab, "basic-info-tab")
       |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
+    case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok, socket} ->
         {:noreply, socket}
 

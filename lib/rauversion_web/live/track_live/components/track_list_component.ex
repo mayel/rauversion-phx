@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.TrackListComponent do
+defmodule RauversionExtension.UI.TrackLive.TrackListComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.{Tracks, Repo}
 
   @impl true
@@ -37,7 +37,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
   #    |> assign(tracks: tracks)}
   # end
 
-  defp list_tracks(page, assigns = %{current_user: %Rauversion.Accounts.User{}}) do
+  defp list_tracks(page, assigns = %{current_user: %{id: _}}) do
     Tracks.list_tracks_by_username(assigns.profile.username)
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
     |> Repo.paginate(page: page, page_size: 5)
@@ -82,7 +82,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
   def handle_event("delete-track", %{"id" => id}, socket) do
     track = Tracks.get_track!(id)
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, track.user_id) do
+    case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, track.user_id) do
       {:ok, socket} ->
         {:ok, _} = Tracks.delete_track(track)
         {:noreply, push_event(socket, "remove-item", %{id: "track-item-#{track.id}"})}
@@ -128,7 +128,7 @@ defmodule RauversionWeb.TrackLive.TrackListComponent do
                 data-paginate-end={assigns.track_meta.total_pages == @page}>
                 <%= for track <- @tracks do %>
                   <.live_component
-                    module={RauversionWeb.TrackLive.TrackComponent}
+                    module={RauversionExtension.UI.TrackLive.TrackComponent}
                     id={"track-list-#{track.id}"}
                     track={track}
                     repost={nil}

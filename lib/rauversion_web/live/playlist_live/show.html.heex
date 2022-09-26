@@ -2,7 +2,7 @@
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.playlist_show_path(@socket, :show, @playlist)}>
     <.live_component
-      module={RauversionWeb.PlaylistLive.FormComponent}
+      module={RauversionExtension.UI.PlaylistLive.FormComponent}
       id={@playlist.id}
       title={@page_title}
       action={@live_action}
@@ -24,7 +24,7 @@
   <.modal return_to={Routes.profile_index_path(@socket, :index, @share_track.user.username)}>
     <.live_component
       id={"share-track-modal-#{@share_track.id}"}
-      module={RauversionWeb.ProfileLive.ShareTrackComponent}
+      module={RauversionExtension.UI.ProfileLive.ShareTrackComponent}
       track={@share_track}
     />
   </.modal>
@@ -179,7 +179,7 @@
 
         <div class="flex-grow">
           <.live_component
-            module={RauversionWeb.PlaylistLive.PlaylistShowItemsComponent}
+            module={RauversionExtension.UI.PlaylistLive.PlaylistShowItemsComponent}
             id={"playlist-#{@playlist.id}"}
             playlist={@playlist}
             current_user={@current_user}

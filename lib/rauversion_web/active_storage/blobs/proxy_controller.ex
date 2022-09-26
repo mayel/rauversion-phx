@@ -18,10 +18,10 @@
 #   end
 # end
 
-defmodule RauversionWeb.ActiveStorage.Blobs.ProxyController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.ActiveStorage.Blobs.ProxyController do
+  use RauversionExtension.UI.Web, :controller
 
-  # action_fallback RauversionWeb.FallbackController
+  # action_fallback RauversionExtension.UI.FallbackController
 
   def show(conn, %{"signed_id" => signed_id}) do
     case conn |> handle_action(signed_id) do

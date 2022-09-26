@@ -1,5 +1,5 @@
-defmodule RauversionWeb.TrackLiveTest do
-  use RauversionWeb.ConnCase
+defmodule RauversionExtension.UI.TrackLiveTest do
+  use RauversionExtension.UI.Web.ConnCase
 
   import Phoenix.LiveViewTest
   import Rauversion.TracksFixtures

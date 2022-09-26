@@ -11,10 +11,10 @@
 #   end
 # end
 
-defmodule RauversionWeb.ActiveStorage.Representations.RedirectController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.ActiveStorage.Representations.RedirectController do
+  use RauversionExtension.UI.Web, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  action_fallback RauversionExtension.UI.FallbackController
 
   def show(conn, params) do
     conn

@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.TrackComponent do
+defmodule RauversionExtension.UI.TrackLive.TrackComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Tracks
 
@@ -88,7 +88,7 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
                   </h4>
                   <h5 class="text-sm font-">
                     <%= case track.user do
-                      %Rauversion.Accounts.User{} ->  track.user.username
+                      %{id: _} ->  track.user.username
                       _ -> ""
                     end %>
                   </h5>
@@ -136,29 +136,32 @@ defmodule RauversionWeb.TrackLive.TrackComponent do
 
           <.live_component
             id={"share-track-button-#{track.id}"}
-            module={RauversionWeb.TrackLive.ShareTrackButtonComponent}
+            module={RauversionExtension.UI.TrackLive.ShareTrackButtonComponent}
             track={track}
           />
 
-          <.live_component
+        <%= if Code.ensure_loaded?(RauversionWeb.LikeTrackButtonComponent) do %>
+
+        <.live_component
             id={"like-track-button-#{track.id}"}
-            module={RauversionWeb.TrackLive.LikeTrackButtonComponent}
+            module={RauversionWeb.LikeTrackButtonComponent}
             track={track}
             current_user={current_user}
           />
 
           <.live_component
             id={"repost-track-button-#{track.id}"}
-            module={RauversionWeb.TrackLive.RepostTrackButtonComponent}
+            module={RauversionWeb.RepostTrackButtonComponent}
             track={track}
             current_user={current_user}
           />
+        <% end %>
 
           <%= if current_user do %>
 
             <.live_component
               id={"playlist-button-add-track-#{track.id}"}
-              module={RauversionWeb.PlaylistLive.AddToPlaylistComponent}
+              module={RauversionExtension.UI.PlaylistLive.AddToPlaylistComponent}
               track={track}
               current_user={@current_user}
               return_to={Routes.playlist_index_path(@socket, :index)}

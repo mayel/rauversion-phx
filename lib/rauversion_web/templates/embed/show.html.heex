@@ -24,7 +24,7 @@
         <h4 class="text-md font-bold">
           <%= live_redirect @track.title, to: Routes.track_show_url(@conn, :show, @track) %>
         </h4>
-        <%= if @track.user == %Rauversion.Accounts.User{} do %>
+        <%= if is_map(@track.user) do %>
           <h5 class="text-sm font-"><%= @track.user.username %></h5>
         <% end %>
       </div>

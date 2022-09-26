@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.ShareTrackComponent do
+defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: false}) do
     url = Routes.embed_url(socket, :private, Rauversion.Tracks.signed_id(track))

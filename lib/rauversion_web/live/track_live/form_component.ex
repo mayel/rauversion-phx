@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.FormComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.TrackLive.FormComponent do
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Tracks
-  alias RauversionWeb.TrackLive.Step
+  alias RauversionExtension.UI.TrackLive.Step
 
   @impl true
   def update(%{track: track} = assigns, socket) do

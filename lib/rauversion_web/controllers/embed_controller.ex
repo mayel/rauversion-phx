@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EmbedController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.EmbedController do
+  use RauversionExtension.UI.Web, :controller
 
   def show(conn, %{"track_id" => track_id}) do
     track = Rauversion.Tracks.get_public_track!(track_id)

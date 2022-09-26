@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.EventSponsors do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.EventsLive.EventSponsors do
+  use RauversionExtension.UI.Web, :live_component
 
   def render(assigns) do
     ~H"""

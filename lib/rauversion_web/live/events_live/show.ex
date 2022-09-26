@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.Show do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.EventsLive.Show do
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.{Events, Repo}

@@ -1,5 +1,5 @@
-defmodule RauversionWeb.ErrorView do
-  use RauversionWeb, :view
+defmodule RauversionExtension.UI.ErrorView do
+  use RauversionExtension.UI.Web, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

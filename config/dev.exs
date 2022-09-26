@@ -1,17 +1,14 @@
 import Config
 
 # Configure your database
-config :rauversion, Rauversion.Repo,
+config :rauversion_extension, Rauversion.Repo,
   username: "postgres",
-  password: "postgres",
+  password: System.get_env("POSTGRES_PASSWORD", "postgres"),
   database: "rauversion_phx_dev",
   hostname: System.get_env("DB_HOST", "localhost"),
   show_sensitive_data_on_connection_error: true,
   pool_size: 10,
   stacktrace: true
-
-config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
-config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -19,7 +16,7 @@ config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :rauversion, RauversionWeb.Endpoint,
+config :rauversion_extension, RauversionWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {0, 0, 0, 0}, port: 4000],
@@ -58,7 +55,7 @@ config :rauversion, RauversionWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :rauversion, RauversionWeb.Endpoint,
+config :rauversion_extension, RauversionWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
@@ -82,7 +79,7 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-config :rauversion, Oban,
+config :rauversion_extension, Oban,
   repo: Rauversion.Repo,
   plugins: [Oban.Plugins.Pruner],
   queues: [default: 10, events: 50, media: 20]

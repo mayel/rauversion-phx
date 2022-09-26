@@ -1,11 +1,11 @@
-defmodule RauversionWeb.TrackLive.Index do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.TrackLive.Index do
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
   alias Rauversion.Repo
-  alias RauversionWeb.TrackLive.Step
+  alias RauversionExtension.UI.TrackLive.Step
 
   @impl true
   def mount(_params, _session, socket) do
@@ -42,7 +42,7 @@ defmodule RauversionWeb.TrackLive.Index do
         Tracks.get_track!(id) |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
       )
 
-    case RauversionWeb.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
+    case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok} ->
         socket
 

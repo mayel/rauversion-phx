@@ -1,7 +1,7 @@
 
 <div class="flex-1 flex xl:overflow-hidden">
 
-  <.live_component module={RauversionWeb.EventsLive.NavBar} 
+  <.live_component module={RauversionExtension.UI.EventsLive.NavBar} 
     id="nav_bar"
     event={@event} 
     live_action={@live_action} 
@@ -22,39 +22,39 @@
 
       <%= case @live_action do 
         :new -> live_component(
-                    RauversionWeb.Live.EventsLive.Components.FormComponent,
+                    RauversionExtension.UI.Live.EventsLive.Components.FormComponent,
                     id: "all-track-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
                     uploads: @uploads
                   )
         :edit -> live_component(
-                    RauversionWeb.Live.EventsLive.Components.FormComponent,
+                    RauversionExtension.UI.Live.EventsLive.Components.FormComponent,
                     id: "all-track-#{@event.id}",
                     event: @event,
                     changeset: @changeset,
                     uploads: @uploads
                   )
         :schedule -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent,
+                  RauversionExtension.UI.Live.EventsLive.Components.SchedulingFormComponent,
                   id: "scheduling-form",
                   event: @event,
                   changeset: @changeset
                 )
         :tickets -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.TicketsFormComponent,
+                  RauversionExtension.UI.Live.EventsLive.Components.TicketsFormComponent,
                   id: "tickets-form",
                   event: @event,
                   changeset: @changeset
                 )
         :tax -> live_component(
-                  RauversionWeb.Live.EventsLive.Components.TaxFormComponent,
+                  RauversionExtension.UI.Live.EventsLive.Components.TaxFormComponent,
                   id: "tax-form",
                   event: @event,
                   changeset: @changeset
                 )
         :attendees -> live_component(
-                        RauversionWeb.Live.EventsLive.Components.AttendeesComponent,
+                        RauversionExtension.UI.Live.EventsLive.Components.AttendeesComponent,
                         id: "attendees",
                         event: @event
                       )

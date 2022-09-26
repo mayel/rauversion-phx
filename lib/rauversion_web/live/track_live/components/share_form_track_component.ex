@@ -1,8 +1,8 @@
-defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
+defmodule RauversionExtension.UI.TrackLive.ShareFormTrackComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def render(
         %{
@@ -62,7 +62,7 @@ defmodule RauversionWeb.TrackLive.ShareFormTrackComponent do
 
               <div class="">
                 <.live_component
-                  module={RauversionWeb.TrackLive.SharerComponent}
+                  module={RauversionExtension.UI.TrackLive.SharerComponent}
                   id="hero"
                   track={@track}
                 />

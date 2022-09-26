@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.Components.SchedulingSettingsForm do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.EventsLive.Components.SchedulingSettingsForm do
+  use RauversionExtension.UI.Web, :live_component
 
   @impl true
   def render(assigns) do

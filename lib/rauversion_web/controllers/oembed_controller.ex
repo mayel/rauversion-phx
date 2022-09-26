@@ -1,5 +1,5 @@
-defmodule RauversionWeb.OEmbedController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.OEmbedController do
+  use RauversionExtension.UI.Web, :controller
   alias Rauversion.Services.FetchCardLink
   alias Rauversion.PreviewCards
 

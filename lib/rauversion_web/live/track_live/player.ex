@@ -1,5 +1,5 @@
-defmodule RauversionWeb.TrackLive.Player do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.TrackLive.Player do
+  use RauversionExtension.UI.Web, :live_view
 
   alias Rauversion.{Tracks, Repo}
 

@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.EventSpeakers do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.EventsLive.EventSpeakers do
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Events
 

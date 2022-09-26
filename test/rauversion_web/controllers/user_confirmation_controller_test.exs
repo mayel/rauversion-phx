@@ -1,5 +1,5 @@
-defmodule RauversionWeb.UserConfirmationControllerTest do
-  use RauversionWeb.ConnCase, async: true
+defmodule RauversionExtension.UI.UserConfirmationControllerTest do
+  use RauversionExtension.UI.Web.ConnCase, async: true
 
   alias Rauversion.Accounts
   alias Rauversion.Repo

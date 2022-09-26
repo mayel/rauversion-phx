@@ -4,7 +4,7 @@
 
 ![image](https://user-images.githubusercontent.com/11976/174422926-b392a1f5-bd6a-4bd2-b6c8-8d41dad6711d.png)
 
-[![.github/workflows/ci.yml](https://github.com/rauversion/rauversion-phx/actions/workflows/ci.yml/badge.svg)](https://github.com/rauversion/rauversion-phx/actions/workflows/ci.yml)
+[![.github/workflows/ci.yml](https://github.com/rauversion_extension/rauversion_extension-phx/actions/workflows/ci.yml/badge.svg)](https://github.com/rauversion_extension/rauversion_extension-phx/actions/workflows/ci.yml)
 
 Rauversion is an open source music sharing platform.
 
@@ -21,12 +21,12 @@ To start your Phoenix server:
   * Install dependencies with `mix deps.get`
   * rename `.env.example` to `.env` and add your variable configurations
   * Create and migrate your database with `mix ecto.setup`
-  * Create some fake accounts `mix fake_accounts`
   * Compile assets `cd assets && yarn install & cd ..`
+  * Optionally create some fake accounts `mix fake_accounts`
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-# Setup:
+
 
 ### Generate fake accounts
 

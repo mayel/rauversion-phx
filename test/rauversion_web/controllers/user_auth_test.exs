@@ -1,8 +1,8 @@
-defmodule RauversionWeb.UserAuthTest do
-  use RauversionWeb.ConnCase, async: true
+defmodule RauversionExtension.UI.UserAuthTest do
+  use RauversionExtension.UI.Web.ConnCase, async: true
 
   alias Rauversion.Accounts
-  alias RauversionWeb.UserAuth
+  alias RauversionExtension.UI.UserAuth
   import Rauversion.AccountsFixtures
 
   @remember_me_cookie "_rauversion_web_user_remember_me"

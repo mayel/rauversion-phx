@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.Index do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.EventsLive.Index do
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   @impl true

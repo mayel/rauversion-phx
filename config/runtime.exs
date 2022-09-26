@@ -1,5 +1,7 @@
 import Config
 
+config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
+
 unless Mix.env() == :prod do
   Dotenv.load!()
 end
@@ -33,17 +35,23 @@ config :active_storage, :services,
     root: "tmp/storage"
   ]
 
-config :rauversion, Rauversion.Vault,
-  ciphers: [
-    default: {
-      Cloak.Ciphers.AES.GCM,
-      tag: "AES.GCM.V1", key: Base.decode64!(System.get_env("VAULT_KEY"))
-    }
-  ]
+key = System.get_env("VAULT_KEY")
+with {:ok, key} <- Base.decode64(key) do
+  config :rauversion_extension, Rauversion.Vault,
+    ciphers: [
+      default: {
+        Cloak.Ciphers.AES.GCM,
+        tag: "AES.GCM.V1", key: key
+      }
+    ]
+else _ ->
+  raise "Invalid key #{key} - please set env variable VAULT_KEY. You can generate one using: `elixir --eval 'IO.puts Base.encode64(:crypto.strong_rand_bytes(32))'`"
+end
 
-config :rauversion, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
 
-config :rauversion, disabled_registrations: System.get_env("DISABLED_REGISTRATIONS", "false")
+config :rauversion_extension, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
+
+config :rauversion_extension, disabled_registrations: System.get_env("DISABLED_REGISTRATIONS", "false")
 
 config :ueberauth, Ueberauth.Strategy.Zoom.OAuth,
   client_id: System.get_env("ZOOM_CLIENT_ID"),
@@ -68,6 +76,9 @@ config :ueberauth, Ueberauth.Strategy.Stripe.OAuth,
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 if config_env() == :prod do
+
+  config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
@@ -75,7 +86,7 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  config :rauversion, Rauversion.Repo,
+  config :rauversion_extension, Rauversion.Repo,
     ssl: true,
     # socket_options: [:inet6],
     url: database_url,
@@ -95,7 +106,7 @@ if config_env() == :prod do
 
   config :active_storage, :secret_key_base, secret_key_base
 
-  config :rauversion, RauversionWeb.Endpoint,
+  config :rauversion_extension, RauversionWeb.Endpoint,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
@@ -111,7 +122,7 @@ if config_env() == :prod do
   # If you are doing OTP releases, you need to instruct Phoenix
   # to start each relevant endpoint:
   #
-  #     config :rauversion, RauversionWeb.Endpoint, server: true
+  #     config :rauversion_extension, RauversionWeb.Endpoint, server: true
   #
   # Then you can assemble a release by calling `mix release`.
   # See `mix help release` for more information.
@@ -122,7 +133,7 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :rauversion, Rauversion.Mailer,
+  #     config :rauversion_extension, Rauversion.Mailer,
   #       adapter: Swoosh.Adapters.Mailgun,
   #       api_key: System.get_env("MAILGUN_API_KEY"),
   #       domain: System.get_env("MAILGUN_DOMAIN")
@@ -134,7 +145,7 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 
-  config :rauversion, Rauversion.Mailer,
+  config :rauversion_extension, Rauversion.Mailer,
     adapter: Swoosh.Adapters.SMTP,
     relay: System.get_env("SMTP_DOMAIN"),
     username: System.get_env("SMTP_USERNAME"),
@@ -149,4 +160,12 @@ if config_env() == :prod do
     # ],
     retries: 2,
     no_mx_lookups: false
+
+else
+
+  config :rauversion, :domain, System.get_env("HOST", "http://localhost:4000")
+
+  config :rauversion_extension, Rauversion.Repo,
+    password: System.get_env("POSTGRES_PASSWORD", "postgres")
+
 end

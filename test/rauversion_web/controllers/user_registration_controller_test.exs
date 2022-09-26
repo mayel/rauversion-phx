@@ -1,5 +1,5 @@
-defmodule RauversionWeb.UserRegistrationControllerTest do
-  use RauversionWeb.ConnCase, async: true
+defmodule RauversionExtension.UI.UserRegistrationControllerTest do
+  use RauversionExtension.UI.Web.ConnCase, async: true
 
   import Rauversion.AccountsFixtures
 

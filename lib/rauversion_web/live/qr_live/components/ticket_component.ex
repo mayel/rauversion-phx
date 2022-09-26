@@ -1,5 +1,5 @@
-defmodule RauversionWeb.QrLive.Components.TicketComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.QrLive.Components.TicketComponent do
+  use RauversionExtension.UI.Web, :live_component
 
   def render(assigns) do
     ~H"""

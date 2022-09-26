@@ -1,5 +1,5 @@
-defmodule RauversionWeb.Live.EventsLive.Components.AttendeesComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.Live.EventsLive.Components.AttendeesComponent do
+  use RauversionExtension.UI.Web, :live_component
 
   def update(assigns, socket) do
     {:ok,

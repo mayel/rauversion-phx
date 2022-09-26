@@ -22,10 +22,10 @@
 #     end
 # end
 
-defmodule RauversionWeb.ActiveStorage.DirectUploadsController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.ActiveStorage.DirectUploadsController do
+  use RauversionExtension.UI.Web, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  action_fallback RauversionExtension.UI.FallbackController
 
   def create(conn, params) do
     blob = ActiveStorage.Blob.create_before_direct_upload!(blob_args(params))

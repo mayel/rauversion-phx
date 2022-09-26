@@ -1,20 +1,17 @@
-defmodule RauversionWeb.ProfileLive.Index do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.ProfileLive.Index do
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.{Accounts, Tracks, UserFollows}
 
   @impl true
   def mount(_params = %{"username" => id}, _session, socket) do
+    # TODO: hook into configured @user_schema
     profile = Accounts.get_user_by_username(id)
 
     socket =
       socket
       |> assign(:profile, profile)
-      |> assign(
-        :user_follow,
-        get_follow_for_current_user(profile.id, socket.assigns.current_user)
-      )
       |> assign(:share_track, nil)
 
     Tracks.subscribe()
@@ -22,13 +19,6 @@ defmodule RauversionWeb.ProfileLive.Index do
     {:ok, socket}
   end
 
-  defp get_follow_for_current_user(id, _current_user = %Accounts.User{id: current_user_id}) do
-    UserFollows.following_for(current_user_id, id)
-  end
-
-  defp get_follow_for_current_user(_id, _current_user = nil) do
-    nil
-  end
 
   # @impl true
   # def handle_info({Tracks, [:tracks, _], _}, socket) do
@@ -36,32 +26,6 @@ defmodule RauversionWeb.ProfileLive.Index do
   #  {:noreply, assign(socket, :tracks, Tracks.list_tracks())}
   # end
 
-  @impl true
-  def handle_event("follow-user", %{}, socket) do
-    UserFollows.create_user_follow(%{
-      follower_id: socket.assigns.current_user.id,
-      following_id: socket.assigns.profile.id
-    })
-
-    {:noreply,
-     socket
-     |> assign(
-       :user_follow,
-       get_follow_for_current_user(socket.assigns.profile.id, socket.assigns.current_user)
-     )}
-  end
-
-  @impl true
-  def handle_event("unfollow-user", %{}, socket) do
-    UserFollows.delete_user_follow(socket.assigns.user_follow)
-
-    {:noreply,
-     socket
-     |> assign(
-       :user_follow,
-       get_follow_for_current_user(socket.assigns.profile.id, socket.assigns.current_user)
-     )}
-  end
 
   @impl true
   def handle_info(

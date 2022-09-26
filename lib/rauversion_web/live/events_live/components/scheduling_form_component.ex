@@ -1,5 +1,5 @@
-defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.Live.EventsLive.Components.SchedulingFormComponent do
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Events
 
@@ -130,7 +130,7 @@ defmodule RauversionWeb.Live.EventsLive.Components.SchedulingFormComponent do
             <div class="sm:col-span-6">
 
               <%= for i <- inputs_for(f, :scheduling_settings) do %>
-                <%= live_component RauversionWeb.EventsLive.Components.SchedulingSettingsForm,
+                <%= live_component RauversionExtension.UI.EventsLive.Components.SchedulingSettingsForm,
                   id: "aoaoa-#{i.index}",
                   f: i,
                   target: @myself

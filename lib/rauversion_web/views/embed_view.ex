@@ -1,3 +1,3 @@
-defmodule RauversionWeb.EmbedView do
-  use RauversionWeb, :view
+defmodule RauversionExtension.UI.EmbedView do
+  use RauversionExtension.UI.Web, :view
 end

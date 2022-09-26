@@ -4,7 +4,7 @@
 
     <%= if @step.name == "upload" do %>
       <.live_component
-        module={RauversionWeb.TrackLive.UploadFormComponent}
+        module={RauversionExtension.UI.TrackLive.UploadFormComponent}
         id="track-form"
         changeset={@changeset}
         track={@track}
@@ -18,7 +18,7 @@
 
     <%= if @step.name == "info" and @action == :new do %>
       <.live_component
-        module={RauversionWeb.TrackLive.InfoFormComponent}
+        module={RauversionExtension.UI.TrackLive.InfoFormComponent}
         id="track-form"
         changeset={@changeset}
         track={@track}
@@ -32,7 +32,7 @@
 
     <%= if @step.name == "info" and @action == :edit do %>
       <.live_component
-        module={RauversionWeb.TrackLive.EditFormComponent}
+        module={RauversionExtension.UI.TrackLive.EditFormComponent}
         id="track-form"
         changeset={@changeset}
         track={@track}
@@ -48,7 +48,7 @@
     <%= if @step.name == "share" do %>
       <.live_component
         id="share-track"
-        module={RauversionWeb.TrackLive.ShareFormTrackComponent}
+        module={RauversionExtension.UI.TrackLive.ShareFormTrackComponent}
         track={@track}
       />
     <% end %>

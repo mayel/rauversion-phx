@@ -12,10 +12,10 @@
 #   end
 # end
 
-defmodule RauversionWeb.ActiveStorage.Representations.ProxyController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.ActiveStorage.Representations.ProxyController do
+  use RauversionExtension.UI.Web, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  action_fallback RauversionExtension.UI.FallbackController
 
   # def show
   #   http_cache_forever public: true do

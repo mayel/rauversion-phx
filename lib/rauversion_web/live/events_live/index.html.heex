@@ -2,14 +2,14 @@
 <div class="">
     <%= case @kind do 
       :published -> live_component(
-                  RauversionWeb.EventsLive.EventsListComponent,
+                  RauversionExtension.UI.EventsLive.EventsListComponent,
                   id: "all-posts-published",
                   page: 1,
                   current_user: assigns[:current_user]
                 )
 
       :mine -> live_component(
-                  RauversionWeb.EventsLive.UserEventsListComponent,
+                  RauversionExtension.UI.EventsLive.UserEventsListComponent,
                   id: "all-draft-posts-published",
                   page: 1,
                   current_user: assigns[:current_user]

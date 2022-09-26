@@ -1,7 +1,7 @@
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.track_index_path(@socket, :index)}>
     <.live_component
-      module={RauversionWeb.TrackLive.FormComponent}
+      module={RauversionExtension.UI.TrackLive.FormComponent}
       id={@track.id || :new}
       title={@page_title}
       action={@live_action}
@@ -317,7 +317,7 @@
 
 
     <%= live_component(
-                  RauversionWeb.TrackLive.TrackListingComponent,
+                  RauversionExtension.UI.TrackLive.TrackListingComponent,
                   id: "all-track-listing"
                 ) %>
   </section>

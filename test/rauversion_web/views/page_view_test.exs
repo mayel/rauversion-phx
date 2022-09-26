@@ -1,3 +1,3 @@
-defmodule RauversionWeb.PageViewTest do
-  use RauversionWeb.ConnCase, async: true
+defmodule RauversionExtension.UI.PageViewTest do
+  use RauversionExtension.UI.Web.ConnCase, async: true
 end

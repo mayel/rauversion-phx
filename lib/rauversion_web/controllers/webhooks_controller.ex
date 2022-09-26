@@ -1,5 +1,5 @@
-defmodule RauversionWeb.WebhooksController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.WebhooksController do
+  use RauversionExtension.UI.Web, :controller
 
   alias Rauversion.Accounts
 

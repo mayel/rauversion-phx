@@ -1,8 +1,8 @@
-defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
+defmodule RauversionExtension.UI.PlaylistLive.PlaylistComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def update(assigns = %{current_user: _user = nil}, socket) do
     {
@@ -14,7 +14,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
 
   def update(assigns, socket) do
     case assigns do
-      %{current_user: _current_user = %Rauversion.Accounts.User{}} ->
+      %{current_user: _current_user = %{id: _}} ->
         like =
           case assigns.playlist.likes do
             [like] -> like
@@ -34,34 +34,11 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
   end
 
   def handle_event(
-        "like-playlist",
-        %{"id" => _id},
-        socket = %{
-          assigns: %{playlist: playlist, current_user: current_user = %Rauversion.Accounts.User{}}
-        }
+        "like-playlist" = event,
+        %{"id" => _id} = attrs,
+        socket
       ) do
-    attrs = %{user_id: current_user.id, playlist_id: playlist.id}
-
-    case socket.assigns.like do
-      %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like ->
-        Rauversion.PlaylistLikes.delete_playlist_like(playlist_like)
-        {:noreply, assign(socket, :like, nil)}
-
-      _ ->
-        {:ok, %Rauversion.PlaylistLikes.PlaylistLike{} = playlist_like} =
-          Rauversion.PlaylistLikes.create_playlist_like(attrs)
-
-        {:noreply, assign(socket, :like, playlist_like)}
-    end
-  end
-
-  def handle_event(
-        "like-playlist",
-        %{"id" => _id},
-        socket = %{assigns: %{playlist: _playlist, current_user: _user = nil}}
-      ) do
-    # TODO: SHOW MODAL HERE
-    {:noreply, socket}
+    RauversionExtension.UI.LikeHelpers.handle_event(event, attrs, socket)
   end
 
   def render(
@@ -119,7 +96,7 @@ defmodule RauversionWeb.PlaylistLive.PlaylistComponent do
 
                 <.live_component
                   id={"share-playlist-button-#{@playlist.id}"}
-                  module={RauversionWeb.PlaylistLive.SharePlaylistButtonComponent}
+                  module={RauversionExtension.UI.PlaylistLive.SharePlaylistButtonComponent}
                   playlist={@playlist}
                 />
 

@@ -1,14 +1,14 @@
-defmodule RauversionWeb.TrackLive.Step do
+defmodule RauversionExtension.UI.TrackLive.Step do
   @moduledoc "Describe a step in the multi-step form and where it can go."
   defstruct [:name, :prev, :next]
 end
 
-defmodule RauversionWeb.TrackLive.New do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.TrackLive.New do
+  use RauversionExtension.UI.Web, :live_view
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
-  alias RauversionWeb.TrackLive.Step
+  alias RauversionExtension.UI.TrackLive.Step
 
   @steps [
     %Step{name: "upload", prev: nil, next: "info"},

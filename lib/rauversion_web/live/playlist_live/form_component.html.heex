@@ -2,7 +2,7 @@
 
     <%= case @action do 
       :new -> live_component(
-                  RauversionWeb.PlaylistLive.CreateFormComponent,
+                  RauversionExtension.UI.PlaylistLive.CreateFormComponent,
                   id: "playlist-new",
                   changeset: @changeset,
                   ref: @myself,
@@ -13,7 +13,7 @@
                 )
 
       :edit -> live_component(
-                  RauversionWeb.PlaylistLive.EditFormComponent,
+                  RauversionExtension.UI.PlaylistLive.EditFormComponent,
                   id: "edit-new",
                   changeset: @changeset,
                   tab: @tab,

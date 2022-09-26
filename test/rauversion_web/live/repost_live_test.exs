@@ -1,5 +1,5 @@
-defmodule RauversionWeb.RepostLiveTest do
-  use RauversionWeb.ConnCase
+defmodule RauversionExtension.UI.RepostLiveTest do
+  use RauversionExtension.UI.Web.ConnCase
 
   import Phoenix.LiveViewTest
   import Rauversion.RepostsFixtures

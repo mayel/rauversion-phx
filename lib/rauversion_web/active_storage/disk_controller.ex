@@ -5,10 +5,10 @@
 # Always go through the BlobsController, or your own authenticated controller, rather than directly
 # to the service URL.
 
-defmodule RauversionWeb.ActiveStorage.DiskController do
-  use RauversionWeb, :controller
+defmodule RauversionExtension.UI.ActiveStorage.DiskController do
+  use RauversionExtension.UI.Web, :controller
 
-  action_fallback RauversionWeb.FallbackController
+  action_fallback RauversionExtension.UI.FallbackController
 
   def show(conn, %{"encoded_key" => encoded_key, "filename" => _filename}) do
     case decode_verified_key(encoded_key) do

@@ -1,5 +1,5 @@
-defmodule RauversionWeb.EventsLive.EventTicketsComponent do
-  use RauversionWeb, :live_component
+defmodule RauversionExtension.UI.EventsLive.EventTicketsComponent do
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.{PurchasedTickets, PurchaseOrders}
   alias Rauversion.PurchaseOrders.{PurchaseOrder}
   alias Rauversion.PurchasedTickets.PurchasedTicket

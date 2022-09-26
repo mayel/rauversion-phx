@@ -1,10 +1,10 @@
-defmodule Rauversion.MixProject do
+defmodule RauversionExtension.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :rauversion,
-      version: "0.1.0",
+      app: :rauversion_extension,
+      version: "0.2.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       # ++ [:cldr],
@@ -20,8 +20,8 @@ defmodule Rauversion.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Rauversion.Application, []},
-      extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon]
+      # mod: {Rauversion.Application, []},
+      # extra_applications: [:ex_cldr, :logger, :runtime_tools, :os_mon]
     ]
   end
 

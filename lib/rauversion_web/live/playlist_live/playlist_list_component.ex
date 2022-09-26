@@ -3,6 +3,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistListComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
   alias Rauversion.{Playlists}
 
   # @impl true
@@ -41,7 +42,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistListComponent do
       assigns.profile,
       assigns[:current_user]
     )
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   defp track_meta(tracks) do

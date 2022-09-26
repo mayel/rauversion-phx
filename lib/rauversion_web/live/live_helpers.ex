@@ -1,5 +1,6 @@
 defmodule RauversionExtension.UI.LiveHelpers do
   import Phoenix.LiveView
+  import Phoenix.Component
   import Phoenix.LiveView.Helpers
   import Phoenix.HTML.Form
   import RauversionExtension.UI.ErrorHelpers

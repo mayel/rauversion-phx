@@ -20,7 +20,7 @@ defmodule Rauversion.PurchasedTicketsTest do
       user = user_fixture()
       event_ticket = event_ticket_fixture(%{event_id: event.id})
 
-      event = Rauversion.Events.get_event!(event.id) |> Rauversion.Repo.preload(:event_tickets)
+      event = Rauversion.Events.get_event!(event.id) |> repo().preload(:event_tickets)
 
       order =
         purchase_order_fixture(%{
@@ -35,11 +35,11 @@ defmodule Rauversion.PurchasedTicketsTest do
       tickets =
         user
         |> Ecto.assoc(:purchased_tickets)
-        |> Rauversion.Repo.all()
-        |> Rauversion.Repo.preload([:purchase_order, :user])
+        |> repo().all()
+        |> repo().preload([:purchase_order, :user])
 
       assert PurchasedTickets.list_purchased_tickets()
-             |> Rauversion.Repo.preload([:purchase_order, :user]) == tickets
+             |> repo().preload([:purchase_order, :user]) == tickets
     end
 
     test "get_purchased_ticket!/1 returns the purchased_ticket with given id" do
@@ -57,7 +57,7 @@ defmodule Rauversion.PurchasedTicketsTest do
 
       Rauversion.PurchaseOrders.generate_purchased_tickets(order)
 
-      ticket = user |> Ecto.assoc(:purchased_tickets) |> Rauversion.Repo.one()
+      ticket = user |> Ecto.assoc(:purchased_tickets) |> repo().one()
 
       assert PurchasedTickets.get_purchased_ticket!(ticket.id) == ticket
     end

@@ -47,7 +47,7 @@ CountByDateQuery.top_countries(user.id)
 ```
 
 ```elixir
-CountByDateQuery.series_by_month(user.id) |> Rauversion.Repo.all()
+CountByDateQuery.series_by_month(user.id) |> repo().all()
 ```
 
 ## Stripe account
@@ -177,7 +177,7 @@ https://jumpseller.cl/support/webpay-webservices-pst/#:~:text=32889344%20es%20el
 > Visa  4242424242424242    3 dígitos aleatorios    Cualquier fecha futura
 
 ```elixir
-event = event |> Rauversion.Repo.preload(:event_tickets)
+event = event |> repo().preload(:event_tickets)
 # R.recompile()
 
 Rauversion.PurchaseOrders.change_purchase_order(
@@ -195,7 +195,7 @@ Rauversion.EventTickets.get_event_ticket!(1)
 
 ```elixir
 import Ecto.Query, warn: false
-alias Rauversion.Repo
+import RauversionExtension
 
 Rauversion.Events.get_event!(2)
 |> Ecto.assoc(:user)

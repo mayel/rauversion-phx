@@ -112,7 +112,7 @@ defmodule RauversionExtension.UI.TrackLive.FormComponent do
         {:noreply,
          response
          |> put_flash(:info, "Track updated successfully")
-         |> assign(track: socket.assigns.track |> Rauversion.Repo.preload(:user))
+         |> assign(track: socket.assigns.track |> repo().preload(:user))
          |> assign(step: step)}
 
       # |> push_redirect(to: socket.assigns.return_to)}

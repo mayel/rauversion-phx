@@ -10,7 +10,7 @@ defmodule RauversionExtension.UI.Live.EventsLive.Components.AttendeesComponent d
 
   defp list_posts(event) do
     Rauversion.Events.list_tickets(event)
-    # Events.list_event() |> Repo.preload(user: :avatar_blob)
+    # Events.list_event() |> repo().preload(user: :avatar_blob)
   end
 
   def render(assigns) do

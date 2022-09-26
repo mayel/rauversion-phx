@@ -23,7 +23,7 @@ defmodule RauversionExtension.UI.Web do
       use PhoenixMetaTags.TagController
       import Plug.Conn
       import RauversionExtension.UI.Gettext
-      alias RauversionWeb.Router.Helpers, as: Routes
+      import RauversionExtension
     end
   end
 
@@ -46,7 +46,7 @@ defmodule RauversionExtension.UI.Web do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {RauversionExtension.UI.LayoutView, "live.html"}
+        layout: {RauversionExtension.default_layout_module(), "live.html"}
 
       use PhoenixMetaTags.TagController
 
@@ -88,6 +88,7 @@ defmodule RauversionExtension.UI.Web do
       use Phoenix.HTML
 
       # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      import Phoenix.Component
       import Phoenix.LiveView.Helpers
       import RauversionExtension.UI.LiveHelpers
 
@@ -96,7 +97,9 @@ defmodule RauversionExtension.UI.Web do
 
       import RauversionExtension.UI.ErrorHelpers
       import RauversionExtension.UI.Gettext
-      alias RauversionWeb.Router.Helpers, as: Routes
+      import RauversionExtension
+
+      import RauversionExtension
     end
   end
 

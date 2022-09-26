@@ -3,6 +3,7 @@ defmodule RauversionExtension.UI.InsightsLive.InsightComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   def render(%{profile: _profile} = assigns) do
     ~H"""
@@ -49,7 +50,7 @@ defmodule RauversionExtension.UI.InsightsLive.InsightComponent do
             phx-update="ignore"
             data-controller="chart"
             data-chart-label-value="Last 12 months"
-            data-chart-points-value={Jason.encode!( CountByDateQuery.series_by_month(@profile.id) |> Rauversion.Repo.all())}>
+            data-chart-points-value={Jason.encode!( CountByDateQuery.series_by_month(@profile.id) |> repo().all())}>
             <canvas class="p-10" width="400" height="200" id="chartLine"></canvas>
           </div>
         </div>

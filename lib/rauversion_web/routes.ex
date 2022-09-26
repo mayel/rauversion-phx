@@ -2,6 +2,23 @@ defmodule RauversionExtension.UI.Routes do
   defmacro __using__(_) do
     quote do
 
+  pipeline :browser_embed do
+    plug :accepts, ["html"]
+    # plug :fetch_session
+    # plug :fetch_live_flash
+    plug :put_secure_browser_headers
+    plug :put_new_layout, {RauversionExtension.UI.LayoutView, :embed}
+  end
+
+  pipeline :active_storage do
+    plug :accepts, ["html", "json"]
+    plug :fetch_session
+    # plug :fetch_live_flash
+    # plug :put_root_layout, {RauversionExtension.UI.LayoutView, :root}
+    plug :put_secure_browser_headers
+    # plug :fetch_current_user
+  end
+
   scope "/", RauversionExtension.UI do
     pipe_through :browser_embed
     get "/embed/:track_id", EmbedController, :show

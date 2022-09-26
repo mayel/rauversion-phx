@@ -1,4 +1,7 @@
 defmodule Rauversion.BlobUtils do
+  import RauversionExtension
+  import RauversionExtension
+
   def create_blob(file) do
     ActiveStorage.Blob.create_and_upload!(
       %ActiveStorage.Blob{},
@@ -21,7 +24,7 @@ defmodule Rauversion.BlobUtils do
   end
 
   def fallback_image(url \\ nil) do
-    RauversionWeb.Router.Helpers.static_path(
+    Routes.static_path(
       RauversionWeb.Endpoint,
       url || "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png"
     )
@@ -41,7 +44,7 @@ defmodule Rauversion.BlobUtils do
         blob |> ActiveStorage.url()
 
       %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        user = user |> Rauversion.Repo.preload(kind_blob)
+        user = user |> repo().preload(kind_blob)
 
         apply(__MODULE__, :blob_url, [user, kind])
     end
@@ -50,7 +53,7 @@ defmodule Rauversion.BlobUtils do
   def blob_for(track, kind) do
     kind_blob = :"#{kind}_blob"
 
-    # a = Rauversion.Accounts.get_user_by_username("michelson") |> Rauversion.Repo.preload(:avatar_blob)
+    # a = Rauversion.Accounts.get_user_by_username("michelson") |> repo().preload(:avatar_blob)
     case track do
       nil ->
         nil
@@ -62,7 +65,7 @@ defmodule Rauversion.BlobUtils do
         blob
 
       %{^kind_blob => %Ecto.Association.NotLoaded{}} ->
-        track = track |> Rauversion.Repo.preload(kind_blob)
+        track = track |> repo().preload(kind_blob)
         apply(__MODULE__, :blob_for, [track, kind])
     end
   end

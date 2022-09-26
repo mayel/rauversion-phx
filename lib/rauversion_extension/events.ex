@@ -4,7 +4,7 @@ defmodule Rauversion.Events do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.Events.Event
 
@@ -18,11 +18,11 @@ defmodule Rauversion.Events do
 
   """
   def list_event do
-    Repo.all(Event)
+    repo().all(Event)
   end
 
   def all_events do
-    Repo.all(Event)
+    repo().all(Event)
   end
 
   def list_events(state \\ "published") when is_binary(state) do
@@ -31,7 +31,7 @@ defmodule Rauversion.Events do
       preload: [:category, user: :avatar_blob]
     )
 
-    # |> Repo.all()
+    # |> repo().all()
   end
 
   def list_events(query, state) do
@@ -39,7 +39,7 @@ defmodule Rauversion.Events do
     |> where([p], p.state == ^state)
     |> preload(user: :avatar_blob)
 
-    # |> Repo.all()
+    # |> repo().all()
   end
 
   def list_events(user = %{}) do
@@ -47,7 +47,7 @@ defmodule Rauversion.Events do
     |> Ecto.assoc(:events)
     |> preload(user: :avatar_blob)
 
-    # |> Repo.all()
+    # |> repo().all()
   end
 
   def list_tickets(event) do
@@ -65,8 +65,8 @@ defmodule Rauversion.Events do
       #  :user
       # ]
     )
-    |> Repo.all()
-    |> Repo.preload([:user, :event_ticket])
+    |> repo().all()
+    |> repo().preload([:user, :event_ticket])
   end
 
   @doc """
@@ -83,8 +83,8 @@ defmodule Rauversion.Events do
       ** (Ecto.NoResultsError)
 
   """
-  def get_event!(id), do: Repo.get!(Event, id)
-  def get_by_slug!(id), do: Repo.get_by!(Event, slug: id)
+  def get_event!(id), do: repo().get!(Event, id)
+  def get_by_slug!(id), do: repo().get_by!(Event, slug: id)
 
   @doc """
   Creates a event.
@@ -101,7 +101,7 @@ defmodule Rauversion.Events do
   def create_event(attrs \\ %{}) do
     %Event{}
     |> Event.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -120,7 +120,7 @@ defmodule Rauversion.Events do
     event
     |> Event.changeset(attrs)
     |> Event.process_one_upload(attrs, "cover")
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -136,7 +136,7 @@ defmodule Rauversion.Events do
 
   """
   def delete_event(%Event{} = event) do
-    Repo.delete(event)
+    repo().delete(event)
   end
 
   @doc """

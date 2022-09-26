@@ -47,5 +47,5 @@ CountByDateQuery.top_countries(user.id)
 ```
 
 ```elixir
-CountByDateQuery.series_by_month(user.id) |> Rauversion.Repo.all()
+CountByDateQuery.series_by_month(user.id) |> Repo.all()
 ```

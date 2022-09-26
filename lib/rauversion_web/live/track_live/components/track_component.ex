@@ -8,7 +8,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackComponent do
 
   @impl true
   def handle_event("add-to-next", %{"id" => id}, socket) do
-    track = Tracks.get_track!(id) |> Rauversion.Repo.preload([:user, :mp3_audio_blob])
+    track = Tracks.get_track!(id) |> repo().preload([:user, :mp3_audio_blob])
 
     struct = %{
       id: track.id,

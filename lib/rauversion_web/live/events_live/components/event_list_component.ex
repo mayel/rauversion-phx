@@ -3,6 +3,7 @@ defmodule RauversionExtension.UI.EventsLive.EventsListComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   alias Rauversion.{Events, Repo}
 
@@ -14,7 +15,7 @@ defmodule RauversionExtension.UI.EventsLive.EventsListComponent do
   end
 
   defp list_posts() do
-    Events.list_event() |> Repo.preload(user: :avatar_blob)
+    Events.list_event() |> repo().preload(user: :avatar_blob)
   end
 
   def render(assigns) do

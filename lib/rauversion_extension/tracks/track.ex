@@ -5,6 +5,7 @@ end
 defmodule Rauversion.Tracks.Track do
   use Ecto.Schema
   import Ecto.Changeset
+  import RauversionExtension
   alias Rauversion.Tracks.Track.TitleSlug
 
   use ActiveStorage.Attached.Model
@@ -166,7 +167,7 @@ defmodule Rauversion.Tracks.Track do
           put_change(struct, :state, "processed")
       end
 
-    struct |> Rauversion.Repo.update()
+    struct |> repo().update()
   end
 
   def convert_to_mp3(struct, file) do

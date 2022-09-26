@@ -1,6 +1,6 @@
 defmodule RauversionExtension.UI.EventsLive.Index do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   @impl true
   def mount(_params, _session, socket) do

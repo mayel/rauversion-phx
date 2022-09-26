@@ -1,10 +1,10 @@
 import Config
 
-config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
-
 unless Mix.env() == :prod do
   Dotenv.load!()
 end
+
+config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
 
 config :active_storage, :services,
   amazon: [
@@ -34,20 +34,6 @@ config :active_storage, :services,
     service: "Disk",
     root: "tmp/storage"
   ]
-
-key = System.get_env("VAULT_KEY")
-with {:ok, key} <- Base.decode64(key) do
-  config :rauversion_extension, Rauversion.Vault,
-    ciphers: [
-      default: {
-        Cloak.Ciphers.AES.GCM,
-        tag: "AES.GCM.V1", key: key
-      }
-    ]
-else _ ->
-  raise "Invalid key #{key} - please set env variable VAULT_KEY. You can generate one using: `elixir --eval 'IO.puts Base.encode64(:crypto.strong_rand_bytes(32))'`"
-end
-
 
 config :rauversion_extension, google_maps_key: System.get_env("GOOGLE_MAPS_KEY")
 
@@ -79,18 +65,6 @@ if config_env() == :prod do
 
   config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
 
-  database_url =
-    System.get_env("DATABASE_URL") ||
-      raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
-      """
-
-  config :rauversion_extension, Rauversion.Repo,
-    ssl: true,
-    # socket_options: [:inet6],
-    url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
@@ -106,60 +80,6 @@ if config_env() == :prod do
 
   config :active_storage, :secret_key_base, secret_key_base
 
-  config :rauversion_extension, RauversionWeb.Endpoint,
-    http: [
-      # Enable IPv6 and bind on all interfaces.
-      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-      # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
-      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: String.to_integer(System.get_env("PORT") || "4000")
-    ],
-    secret_key_base: secret_key_base
-
-  # ## Using releases
-  #
-  # If you are doing OTP releases, you need to instruct Phoenix
-  # to start each relevant endpoint:
-  #
-  #     config :rauversion_extension, RauversionWeb.Endpoint, server: true
-  #
-  # Then you can assemble a release by calling `mix release`.
-  # See `mix help release` for more information.
-
-  # ## Configuring the mailer
-  #
-  # In production you need to configure the mailer to use a different adapter.
-  # Also, you may need to configure the Swoosh API client of your choice if you
-  # are not using SMTP. Here is an example of the configuration:
-  #
-  #     config :rauversion_extension, Rauversion.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # For this example you need include a HTTP client required by Swoosh API client.
-  # Swoosh supports Hackney and Finch out of the box:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
-
-  config :rauversion_extension, Rauversion.Mailer,
-    adapter: Swoosh.Adapters.SMTP,
-    relay: System.get_env("SMTP_DOMAIN"),
-    username: System.get_env("SMTP_USERNAME"),
-    password: System.get_env("SMTP_PASSWORD"),
-    # ssl: true,
-    # tls: :always,
-    auth: :always,
-    port: 587,
-    # dkim: [
-    #  s: "default", d: "domain.com",
-    #  private_key: {:pem_plain, File.read!("priv/keys/domain.private")}
-    # ],
-    retries: 2,
-    no_mx_lookups: false
 
 else
 

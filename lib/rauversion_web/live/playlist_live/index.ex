@@ -1,6 +1,6 @@
 defmodule RauversionExtension.UI.PlaylistLive.Index do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   alias Rauversion.Playlists
   alias Rauversion.Playlists.Playlist

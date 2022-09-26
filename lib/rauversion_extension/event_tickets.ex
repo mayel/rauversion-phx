@@ -4,7 +4,7 @@ defmodule Rauversion.EventTickets do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.EventTickets.EventTicket
 
@@ -18,7 +18,7 @@ defmodule Rauversion.EventTickets do
 
   """
   def list_event_tickets do
-    Repo.all(EventTicket)
+    repo().all(EventTicket)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Rauversion.EventTickets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_event_ticket!(id), do: Repo.get!(EventTicket, id)
+  def get_event_ticket!(id), do: repo().get!(EventTicket, id)
 
   @doc """
   Creates a event_ticket.
@@ -52,7 +52,7 @@ defmodule Rauversion.EventTickets do
   def create_event_ticket(attrs \\ %{}) do
     %EventTicket{}
     |> EventTicket.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -70,7 +70,7 @@ defmodule Rauversion.EventTickets do
   def update_event_ticket(%EventTicket{} = event_ticket, attrs) do
     event_ticket
     |> EventTicket.changeset(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -86,7 +86,7 @@ defmodule Rauversion.EventTickets do
 
   """
   def delete_event_ticket(%EventTicket{} = event_ticket) do
-    Repo.delete(event_ticket)
+    repo().delete(event_ticket)
   end
 
   @doc """

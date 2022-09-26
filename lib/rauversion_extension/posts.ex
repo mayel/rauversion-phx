@@ -4,7 +4,7 @@ defmodule Rauversion.Posts do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.Posts.Post
 
@@ -19,7 +19,7 @@ defmodule Rauversion.Posts do
   """
 
   def all_posts do
-    Repo.all(Post)
+    repo().all(Post)
   end
 
   def list_posts(state) when is_binary(state) do
@@ -28,7 +28,7 @@ defmodule Rauversion.Posts do
       preload: [:category, user: :avatar_blob]
     )
 
-    # |> Repo.all()
+    # |> repo().all()
   end
 
   def list_posts(state) when is_nil(state) do
@@ -67,9 +67,9 @@ defmodule Rauversion.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: repo().get!(Post, id)
 
-  def get_post_by_slug!(id), do: Repo.get_by!(Post, slug: id)
+  def get_post_by_slug!(id), do: repo().get_by!(Post, slug: id)
 
   def new_post(attrs \\ %{}) do
     %Post{}
@@ -91,7 +91,7 @@ defmodule Rauversion.Posts do
   def create_post(attrs \\ %{}) do
     %Post{}
     |> Post.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -110,14 +110,14 @@ defmodule Rauversion.Posts do
     post
     |> Post.changeset(attrs)
     |> Post.process_cover(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   def update_post_attributes(%Post{} = post, attrs) do
     post
     |> Post.update_changeset(attrs)
     |> Post.process_cover(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -133,7 +133,7 @@ defmodule Rauversion.Posts do
 
   """
   def delete_post(%Post{} = post) do
-    Repo.delete(post)
+    repo().delete(post)
   end
 
   @doc """

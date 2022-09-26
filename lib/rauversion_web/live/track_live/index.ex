@@ -1,10 +1,10 @@
 defmodule RauversionExtension.UI.TrackLive.Index do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
-  alias Rauversion.Repo
+  import RauversionExtension
   alias RauversionExtension.UI.TrackLive.Step
 
   @impl true
@@ -39,7 +39,7 @@ defmodule RauversionExtension.UI.TrackLive.Index do
       |> assign(:page_title, "Edit Track")
       |> assign(
         :track,
-        Tracks.get_track!(id) |> Repo.preload([:user, :cover_blob, :mp3_audio_blob])
+        Tracks.get_track!(id) |> repo().preload([:user, :cover_blob, :mp3_audio_blob])
       )
 
     case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
@@ -66,6 +66,6 @@ defmodule RauversionExtension.UI.TrackLive.Index do
 
   defp list_tracks(page) do
     Tracks.list_public_tracks()
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 end

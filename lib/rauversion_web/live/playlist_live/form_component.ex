@@ -1,13 +1,14 @@
 defmodule RauversionExtension.UI.PlaylistLive.FormComponent do
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   alias Rauversion.Playlists
 
   @impl true
   def update(%{playlist: playlist, track: track, action: :new} = assigns, socket) do
-    playlist = playlist |> Rauversion.Repo.preload(:track_playlists)
+    playlist = playlist |> repo().preload(:track_playlists)
 
-    # track = Rauversion.Tracks.get_track!(81) |> Rauversion.Repo.preload(:user)
+    # track = Rauversion.Tracks.get_track!(81) |> repo().preload(:user)
     track_playlist = %{"track_id" => track.id}
 
     # playlist = %Rauversion.Playlists.Playlist{playlist | track_playlists: [track_playlist]}
@@ -19,7 +20,7 @@ defmodule RauversionExtension.UI.PlaylistLive.FormComponent do
 
     playlists =
       Rauversion.Playlists.list_playlists_by_user_with_track(track, assigns.current_user)
-      |> Rauversion.Repo.all()
+      |> repo().all()
 
     {:ok,
      socket
@@ -72,7 +73,7 @@ defmodule RauversionExtension.UI.PlaylistLive.FormComponent do
 
     playlists =
       Rauversion.Playlists.list_playlists_by_user_with_track(track, socket.assigns.current_user)
-      |> Rauversion.Repo.all()
+      |> repo().all()
 
     {:noreply, socket |> assign(:playlists, playlists)}
   end
@@ -92,7 +93,7 @@ defmodule RauversionExtension.UI.PlaylistLive.FormComponent do
         socket.assigns.track,
         socket.assigns.current_user
       )
-      |> Rauversion.Repo.all()
+      |> repo().all()
 
     {:noreply, socket |> assign(:playlists, playlists)}
   end

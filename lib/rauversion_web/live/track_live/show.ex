@@ -19,7 +19,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
         _,
         socket = %{assigns: %{live_action: :show, current_user: _user = nil}}
       ) do
-    track = Tracks.get_track!(id) |> Repo.preload(:user)
+    track = Tracks.get_track!(id) |> repo().preload(:user)
 
     {:noreply,
      socket
@@ -37,8 +37,8 @@ defmodule RauversionExtension.UI.TrackLive.Show do
     track =
       Tracks.get_track_query(id)
       |> Rauversion.Tracks.preload_tracks_preloaded_by_user(user)
-      |> Rauversion.Repo.one()
-      |> Rauversion.Repo.preload([:user])
+      |> repo().one()
+      |> repo().preload([:user])
 
     {:noreply,
      socket
@@ -56,7 +56,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:track, Rauversion.Tracks.find_by_signed_id!(signed_id) |> Repo.preload(:user))}
+     |> assign(:track, Rauversion.Tracks.find_by_signed_id!(signed_id) |> repo().preload(:user))}
   end
 
   @impl true
@@ -66,7 +66,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
       |> assign(:step, %Step{name: "info", prev: "upload", next: "share"})
       |> assign(:page_title, page_title(socket.assigns.live_action))
       |> assign(:current_tab, "basic-info-tab")
-      |> assign(:track, Tracks.get_track!(id) |> Repo.preload(:user))
+      |> assign(:track, Tracks.get_track!(id) |> repo().preload(:user))
 
     case RauversionExtension.UI.LiveHelpers.authorize_user_resource(socket, socket.assigns.track.user_id) do
       {:ok, socket} ->
@@ -112,7 +112,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
      assign(
        socket,
        :share_track,
-       Tracks.get_track!(id) |> Rauversion.Repo.preload(user: :avatar_attachment)
+       Tracks.get_track!(id) |> repo().preload(user: :avatar_attachment)
      )}
   end
 

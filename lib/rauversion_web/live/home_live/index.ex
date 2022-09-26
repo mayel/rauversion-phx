@@ -1,8 +1,9 @@
 defmodule RauversionExtension.UI.HomeLive.Index do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
-  alias Rauversion.{Playlists, Tracks, Accounts, Repo}
+  import RauversionExtension
+  alias Rauversion.{Playlists, Tracks, Repo}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -15,13 +16,13 @@ defmodule RauversionExtension.UI.HomeLive.Index do
     Tracks.list_public_tracks()
     |> Tracks.with_processed()
     |> Tracks.order_by_likes()
-    |> Rauversion.Repo.paginate(page: page, page_size: 4)
+    |> repo().paginate(page: page, page_size: 4)
   end
 
   defp list_playlists(page) do
     Playlists.list_public_playlists()
     |> Playlists.order_by_likes()
-    |> Repo.paginate(page: page, page_size: 6)
+    |> repo().paginate(page: page, page_size: 6)
   end
 
   defp list_users(_page, _current_user = nil) do
@@ -29,8 +30,9 @@ defmodule RauversionExtension.UI.HomeLive.Index do
   end
 
   defp list_users(page, current_user = %{}) do
-    Accounts.unfollowed_users(current_user)
-    |> Repo.paginate(page: page, page_size: 5)
+    if Code.ensure_loaded?(Rauversion.Accounts), do:
+    Rauversion.Accounts.unfollowed_users(current_user)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   @impl true

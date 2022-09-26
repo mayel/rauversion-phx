@@ -3,6 +3,7 @@ defmodule RauversionExtension.UI.ProfileLive.TrendingComponent do
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   @impl true
   def update(assigns, socket) do
@@ -19,7 +20,7 @@ defmodule RauversionExtension.UI.ProfileLive.TrendingComponent do
 
   defp comments_list(page) do
     Rauversion.TrackComments.list_track_comments_query()
-    |> Rauversion.Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   @impl true

@@ -20,16 +20,16 @@ defmodule Rauversion.PlaylistsTest do
     test "list_playlists/0 returns all playlists", %{user: user} do
       playlist = playlist_fixture(%{user_id: user.id})
 
-      # |> Rauversion.Repo.preload([:user, :track_playlists])
+      # |> repo().preload([:user, :track_playlists])
       list = Playlists.list_playlists()
       assert list == [playlist]
     end
 
     test "get_playlist!/1 returns the playlist with given id", %{user: user} do
       playlist =
-        playlist_fixture(%{user_id: user.id}) |> Rauversion.Repo.preload([:track_playlists])
+        playlist_fixture(%{user_id: user.id}) |> repo().preload([:track_playlists])
 
-      record = Playlists.get_playlist!(playlist.id) |> Rauversion.Repo.preload([:track_playlists])
+      record = Playlists.get_playlist!(playlist.id) |> repo().preload([:track_playlists])
 
       assert record == playlist
     end

@@ -1,7 +1,7 @@
 # ExUnit.start()
 ExUnit.start(timeout: 100_000_000)
 
-Ecto.Adapters.SQL.Sandbox.mode(Rauversion.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(RauversionExtension.repo(), :manual)
 
 defmodule ActiveStorageTestHelpers do
   def create_file_blob(options \\ []) do

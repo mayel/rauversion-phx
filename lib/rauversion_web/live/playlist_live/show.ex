@@ -1,7 +1,8 @@
 defmodule RauversionExtension.UI.PlaylistLive.Show do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
+  import RauversionExtension
   alias Rauversion.Playlists
 
   @impl true
@@ -32,7 +33,7 @@ defmodule RauversionExtension.UI.PlaylistLive.Show do
   def handle_event("change-track", %{"id" => id}, socket) do
     track =
       Rauversion.Tracks.get_track!(id)
-      |> Rauversion.Repo.preload([:user, :mp3_audio_blob, :cover_blob])
+      |> repo().preload([:user, :mp3_audio_blob, :cover_blob])
 
     {:noreply,
      socket
@@ -76,7 +77,7 @@ defmodule RauversionExtension.UI.PlaylistLive.Show do
 
   defp get_playlist(id) do
     Playlists.get_playlist!(id)
-    |> Rauversion.Repo.preload([:user, :cover_blob, [track_playlists: [track: :user]]])
+    |> repo().preload([:user, :cover_blob, [track_playlists: [track: :user]]])
   end
 
   defp page_title(:show), do: "Show Playlist"

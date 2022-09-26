@@ -1,8 +1,6 @@
 defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistButtonComponent do
-  # If you generated an app with mix phx.new --live,
-  # the line below would be: use MyAppWeb, :live_component
-  # use Phoenix.LiveComponent
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   @impl true
   def update(assigns, socket) do
@@ -18,7 +16,7 @@ defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistButtonComponent do
      assign(
        socket,
        :share_track,
-       socket.assigns.playlist |> Rauversion.Repo.preload(user: :avatar_attachment)
+       socket.assigns.playlist |> repo().preload(user: :avatar_attachment)
      )}
   end
 

@@ -4,7 +4,7 @@ defmodule Rauversion.TrackPlaylists do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.TrackPlaylists.TrackPlaylist
 
@@ -18,7 +18,7 @@ defmodule Rauversion.TrackPlaylists do
 
   """
   def list_track_playlists do
-    Repo.all(TrackPlaylist)
+    repo().all(TrackPlaylist)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Rauversion.TrackPlaylists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_track_playlist!(id), do: Repo.get!(TrackPlaylist, id)
+  def get_track_playlist!(id), do: repo().get!(TrackPlaylist, id)
 
   @doc """
   Creates a track_playlist.
@@ -52,7 +52,7 @@ defmodule Rauversion.TrackPlaylists do
   def create_track_playlist(attrs \\ %{}) do
     %TrackPlaylist{}
     |> TrackPlaylist.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -70,7 +70,7 @@ defmodule Rauversion.TrackPlaylists do
   def update_track_playlist(%TrackPlaylist{} = track_playlist, attrs) do
     track_playlist
     |> TrackPlaylist.changeset(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -86,7 +86,7 @@ defmodule Rauversion.TrackPlaylists do
 
   """
   def delete_track_playlist(%TrackPlaylist{} = track_playlist) do
-    Repo.delete(track_playlist)
+    repo().delete(track_playlist)
   end
 
   @doc """

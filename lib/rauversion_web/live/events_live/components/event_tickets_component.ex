@@ -1,5 +1,7 @@
 defmodule RauversionExtension.UI.EventsLive.EventTicketsComponent do
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
+
   alias Rauversion.{PurchasedTickets, PurchaseOrders}
   alias Rauversion.PurchaseOrders.{PurchaseOrder}
   alias Rauversion.PurchasedTickets.PurchasedTicket
@@ -31,7 +33,7 @@ defmodule RauversionExtension.UI.EventsLive.EventTicketsComponent do
   def get_public_tickets(event) do
     event
     |> Ecto.assoc(:event_tickets)
-    |> Rauversion.Repo.all()
+    |> repo().all()
     |> Enum.filter(fn x -> !x.settings.hidden end)
   end
 

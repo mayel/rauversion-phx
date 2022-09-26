@@ -1,7 +1,8 @@
 defmodule RauversionExtension.UI.EventsLive.New do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
+  import RauversionExtension
   alias Rauversion.{Events, Repo}
 
   @impl true
@@ -135,8 +136,8 @@ defmodule RauversionExtension.UI.EventsLive.New do
     event =
       socket.assigns.current_user
       |> Ecto.assoc(:events)
-      |> Repo.get_by!(%{slug: id})
-      |> Repo.preload(:event_tickets)
+      |> repo().get_by!(%{slug: id})
+      |> repo().preload(:event_tickets)
 
     socket
     |> assign(:changeset, Events.change_event(event, %{}))

@@ -1,7 +1,8 @@
 defmodule RauversionExtension.UI.EventsLive.Show do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
+  import RauversionExtension
   alias Rauversion.{Events, Repo}
 
   @impl true
@@ -24,12 +25,12 @@ defmodule RauversionExtension.UI.EventsLive.Show do
   end
 
   defp apply_action(socket, :show, %{"id" => id}) do
-    event = Events.get_by_slug!(id) |> Repo.preload([:user])
+    event = Events.get_by_slug!(id) |> repo().preload([:user])
     socket |> assign(:event, event)
   end
 
   defp apply_action(socket, :payment_success, %{"slug" => id}) do
-    event = Events.get_by_slug!(id) |> Repo.preload([:user])
+    event = Events.get_by_slug!(id) |> repo().preload([:user])
     socket |> assign(:event, event) |> assign(:payment_success, true)
   end
 end

@@ -34,22 +34,19 @@ defmodule RauversionExtension.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.8"},
       {:ecto_nested_changeset, "~> 0.2.0"},
-      {:cloak_ecto, "~> 1.2.0"},
       {:number, "~> 1.0.3"},
       {:postgrex, ">= 0.0.0"},
       {:ecto_psql_extras, "~> 0.6"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.17.0"},
+      {:phoenix_live_view, "~> 0.18.0"},
       {:floki, ">= 0.30.0", override: true},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
@@ -74,12 +71,6 @@ defmodule RauversionExtension.MixProject do
       {:oembed, "~> 0.4.1"},
       {:tesla, "~> 1.4"},
       {:ex_cldr_dates_times, "~> 2.0"},
-      {:oauth2, "~> 1.0 or ~> 2.0"},
-      {:ueberauth, "~> 0.7", override: true},
-      {
-        :transbank,
-        git: "https://github.com/elixircl/transbank-elixir.git", branch: "main"
-      },
       {
         :active_storage,
         git: "https://github.com/chaskiq/ex-rails.git",

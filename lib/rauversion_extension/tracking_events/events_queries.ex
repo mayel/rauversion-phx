@@ -1,7 +1,7 @@
 defmodule CountByDateQuery do
   import Ecto.Query
   use Timex
-  alias Rauversion.Repo
+  import RauversionExtension
   alias Rauversion.TrackingEvents.Event
   alias Rauversion.Tracks.Track
 
@@ -29,7 +29,7 @@ defmodule CountByDateQuery do
         user: [:avatar_blob]
       ]
     )
-    |> Repo.all()
+    |> repo().all()
   end
 
   def top_listeners(profile_id) do
@@ -47,7 +47,7 @@ defmodule CountByDateQuery do
         :avatar_blob
       ]
     )
-    |> Repo.all()
+    |> repo().all()
   end
 
   def top_countries(profile_id) do
@@ -61,7 +61,7 @@ defmodule CountByDateQuery do
       },
       order_by: [desc: count(event.id)]
     )
-    |> Repo.all()
+    |> repo().all()
   end
 
   def series_by_month(profile_id) do

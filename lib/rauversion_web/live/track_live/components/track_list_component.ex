@@ -40,7 +40,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackListComponent do
   defp list_tracks(page, assigns = %{current_user: %{id: _}}) do
     Tracks.list_tracks_by_username(assigns.profile.username)
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
-    |> Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   defp list_tracks(page, assigns = %{current_user: nil}) do
@@ -48,7 +48,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackListComponent do
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
     |> Tracks.with_processed()
     |> Tracks.published()
-    |> Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   defp track_meta(tracks) do

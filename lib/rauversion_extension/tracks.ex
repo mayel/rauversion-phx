@@ -4,7 +4,7 @@ defmodule Rauversion.Tracks do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.Tracks.Track
 
@@ -141,14 +141,14 @@ defmodule Rauversion.Tracks do
       ** (Ecto.NoResultsError)
 
   """
-  def get_track!(id), do: Repo.get!(Track, id)
+  def get_track!(id), do: repo().get!(Track, id)
 
   def get_public_track!(id) do
     Track
     |> where(id: ^id)
     |> where([t], is_nil(t.private) or t.private == false)
     |> limit(1)
-    |> Repo.one()
+    |> repo().one()
   end
 
   @doc """
@@ -166,7 +166,7 @@ defmodule Rauversion.Tracks do
   def create_track(attrs \\ %{}) do
     %Track{}
     |> Track.new_changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
     |> broadcast_change([:tracks, :created])
   end
 
@@ -187,7 +187,7 @@ defmodule Rauversion.Tracks do
     |> Track.changeset(attrs)
     |> Track.process_one_upload(attrs, "cover")
     |> Track.process_one_upload(attrs, "audio")
-    |> Repo.update()
+    |> repo().update()
     |> broadcast_change([:tracks, :updated])
   end
 
@@ -204,7 +204,7 @@ defmodule Rauversion.Tracks do
 
   """
   def delete_track(%Track{} = track) do
-    Repo.delete(track)
+    repo().delete(track)
     |> broadcast_change([:tracks, :destroyed])
   end
 
@@ -240,8 +240,8 @@ defmodule Rauversion.Tracks do
 
   # processes clip only for :local
   def reprocess_peaks(track) do
-    # track = Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob)
-    # Rauversion.Tracks.get_track!(7) |> Rauversion.Repo.preload(:audio_blob) |> Rauversion.Tracks.reprocess_peaks()
+    # track = Rauversion.Tracks.get_track!(7) |> repo().preload(:audio_blob)
+    # Rauversion.Tracks.get_track!(7) |> repo().preload(:audio_blob) |> Rauversion.Tracks.reprocess_peaks()
 
     blob = Rauversion.Tracks.blob_for(track, :mp3_audio)
     # service = blob |> ActiveStorage.Blob.service()

@@ -4,7 +4,7 @@ defmodule Rauversion.PurchasedTickets do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.PurchasedTickets.PurchasedTicket
 
@@ -18,7 +18,7 @@ defmodule Rauversion.PurchasedTickets do
 
   """
   def list_purchased_tickets do
-    Repo.all(PurchasedTicket)
+    repo().all(PurchasedTicket)
   end
 
   @doc """
@@ -35,7 +35,7 @@ defmodule Rauversion.PurchasedTickets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_purchased_ticket!(id), do: Repo.get!(PurchasedTicket, id)
+  def get_purchased_ticket!(id), do: repo().get!(PurchasedTicket, id)
 
   @doc """
   Creates a purchased_ticket.
@@ -52,7 +52,7 @@ defmodule Rauversion.PurchasedTickets do
   def create_purchased_ticket(attrs \\ %{}) do
     %PurchasedTicket{}
     |> PurchasedTicket.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -70,7 +70,7 @@ defmodule Rauversion.PurchasedTickets do
   def update_purchased_ticket(%PurchasedTicket{} = purchased_ticket, attrs) do
     purchased_ticket
     |> PurchasedTicket.changeset(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   def check_in_purchased_ticket(%PurchasedTicket{} = purchased_ticket) do
@@ -79,7 +79,7 @@ defmodule Rauversion.PurchasedTickets do
       checked_in: true,
       checked_in_at: DateTime.utc_now()
     })
-    |> Repo.update()
+    |> repo().update()
   end
 
   def uncheck_in_purchased_ticket(%PurchasedTicket{} = purchased_ticket) do
@@ -88,7 +88,7 @@ defmodule Rauversion.PurchasedTickets do
       checked_in: false,
       checked_in_at: nil
     })
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -104,7 +104,7 @@ defmodule Rauversion.PurchasedTickets do
 
   """
   def delete_purchased_ticket(%PurchasedTicket{} = purchased_ticket) do
-    Repo.delete(purchased_ticket)
+    repo().delete(purchased_ticket)
   end
 
   @doc """

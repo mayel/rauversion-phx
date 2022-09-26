@@ -31,7 +31,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackListingComponent do
   defp list_tracks(page) do
     Tracks.list_public_tracks()
     |> Rauversion.Tracks.with_processed()
-    |> Repo.paginate(page: page, page_size: 5)
+    |> repo().paginate(page: page, page_size: 5)
   end
 
   @impl true

@@ -18,7 +18,7 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackButtonComponent do
      assign(
        socket,
        :share_track,
-       socket.assigns.track |> Rauversion.Repo.preload(user: :avatar_attachment)
+       socket.assigns.track |> repo().preload(user: :avatar_attachment)
      )}
   end
 

@@ -3,6 +3,8 @@
 defmodule Rauversion.TrackingEvents.WriteBuffer do
   use GenServer
   require Logger
+  import RauversionExtension
+
   @flush_interval_ms 5_000
   @max_buffer_size 10_000
 
@@ -72,7 +74,7 @@ defmodule Rauversion.TrackingEvents.WriteBuffer do
             &(Map.from_struct(&1) |> Map.delete(:__meta__) |> Map.get(:changes))
           )
 
-        Rauversion.Repo.insert_all(Rauversion.TrackingEvents.Event, events)
+        repo().insert_all(Rauversion.TrackingEvents.Event, events)
     end
   end
 end

@@ -18,7 +18,7 @@ defmodule Rauversion.DataCase do
 
   using do
     quote do
-      alias Rauversion.Repo
+      import RauversionExtension
 
       import Ecto
       import Ecto.Changeset
@@ -28,7 +28,7 @@ defmodule Rauversion.DataCase do
   end
 
   setup tags do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Rauversion.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(RauversionExtension.repo(), shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
     :ok
   end

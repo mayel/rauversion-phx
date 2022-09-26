@@ -1,5 +1,6 @@
 defmodule RauversionExtension.UI.EventsLive.UserEventsListComponent do
   use RauversionExtension.UI.Web, :live_component
+  import RauversionExtension
 
   alias Rauversion.{Events, Repo}
 
@@ -33,15 +34,15 @@ defmodule RauversionExtension.UI.EventsLive.UserEventsListComponent do
     case tab do
       "draft" ->
         Events.list_events(user |> Ecto.assoc(:events), "draft")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> repo().paginate(page: 1, page_size: 30)
 
       "published" ->
         Events.list_events(user |> Ecto.assoc(:events), "published")
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> repo().paginate(page: 1, page_size: 30)
 
       "all" ->
         Events.list_events(user)
-        |> Rauversion.Repo.paginate(page: 1, page_size: 30)
+        |> repo().paginate(page: 1, page_size: 30)
     end
   end
 

@@ -1,7 +1,7 @@
 defmodule Rauversion.PreviewCards do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Rauversion.Repo
+  import RauversionExtension
 
   schema "preview_cards" do
     field(:author_name, :string)
@@ -33,11 +33,11 @@ defmodule Rauversion.PreviewCards do
   end
 
   def find_by_url(url) do
-    Repo.get_by(Rauversion.PreviewCards, url: url)
+    repo().get_by(Rauversion.PreviewCards, url: url)
   end
 
   def find_or_create(attrs \\ %{}) do
-    Repo.get_by(Rauversion.PreviewCards, url: attrs.url) ||
+    repo().get_by(Rauversion.PreviewCards, url: attrs.url) ||
       create(attrs)
   end
 
@@ -46,10 +46,10 @@ defmodule Rauversion.PreviewCards do
 
     %Rauversion.PreviewCards{}
     |> changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
     |> case do
       {:ok, card} -> card
-      {:error, _} -> Repo.get_by!(Rauversion.PreviewCards, url: attrs.url)
+      {:error, _} -> repo().get_by!(Rauversion.PreviewCards, url: attrs.url)
     end
   end
 

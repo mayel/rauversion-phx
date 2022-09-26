@@ -4,9 +4,10 @@ defmodule Rauversion.PurchaseOrders do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.PurchaseOrders.PurchaseOrder
+  import RauversionExtension
 
   @doc """
   Returns the list of purchase_orders.
@@ -18,7 +19,7 @@ defmodule Rauversion.PurchaseOrders do
 
   """
   def list_purchase_orders do
-    Repo.all(PurchaseOrder)
+    repo().all(PurchaseOrder)
   end
 
   @doc """
@@ -35,10 +36,10 @@ defmodule Rauversion.PurchaseOrders do
       ** (Ecto.NoResultsError)
 
   """
-  def get_purchase_order!(id), do: Repo.get!(PurchaseOrder, id)
+  def get_purchase_order!(id), do: repo().get!(PurchaseOrder, id)
 
   def get_purchase_order_by_stripe_payment!(id),
-    do: Repo.get_by!(PurchaseOrder, payment_id: id, payment_provider: "stripe")
+    do: repo().get_by!(PurchaseOrder, payment_id: id, payment_provider: "stripe")
 
   @doc """
   Creates a purchase_order.
@@ -55,7 +56,7 @@ defmodule Rauversion.PurchaseOrders do
   def create_purchase_order(attrs \\ %{}) do
     %PurchaseOrder{}
     |> PurchaseOrder.changeset(attrs)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   @doc """
@@ -73,7 +74,7 @@ defmodule Rauversion.PurchaseOrders do
   def update_purchase_order(%PurchaseOrder{} = purchase_order, attrs) do
     purchase_order
     |> PurchaseOrder.changeset(attrs)
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -89,7 +90,7 @@ defmodule Rauversion.PurchaseOrders do
 
   """
   def delete_purchase_order(%PurchaseOrder{} = purchase_order) do
-    Repo.delete(purchase_order)
+    repo().delete(purchase_order)
   end
 
   @doc """
@@ -116,7 +117,7 @@ defmodule Rauversion.PurchaseOrders do
 
   def create_stripe_session(order, event) do
     client = Rauversion.Stripe.Client.new()
-    user = event |> Ecto.assoc(:user) |> Repo.one()
+    user = event |> Ecto.assoc(:user) |> repo().one()
 
     c = Rauversion.Accounts.get_oauth_credential(user, "stripe")
 
@@ -155,13 +156,13 @@ defmodule Rauversion.PurchaseOrders do
         },
         "mode" => "payment",
         "success_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
+          Routes.events_show_url(
             RauversionWeb.Endpoint,
             :payment_success,
             event.slug
           ),
         "cancel_url" =>
-          RauversionWeb.Router.Helpers.events_show_url(
+          Routes.events_show_url(
             RauversionWeb.Endpoint,
             :payment_cancel,
             event.slug
@@ -202,6 +203,6 @@ defmodule Rauversion.PurchaseOrders do
         false -> {:ok, nil}
       end
     end)
-    |> Repo.transaction()
+    |> repo().transaction()
   end
 end

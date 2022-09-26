@@ -4,7 +4,7 @@ defmodule Rauversion.Playlists do
   """
 
   import Ecto.Query, warn: false
-  alias Rauversion.Repo
+  import RauversionExtension
 
   alias Rauversion.Playlists.Playlist
 
@@ -18,7 +18,7 @@ defmodule Rauversion.Playlists do
 
   """
   def list_playlists do
-    Repo.all(Playlist)
+    repo().all(Playlist)
   end
 
   def list_playlists_by_user(user, _preloads = nil) do
@@ -70,7 +70,7 @@ defmodule Rauversion.Playlists do
     |> where(id: ^id)
     |> where([t], is_nil(t.private) or t.private == false)
     |> limit(1)
-    |> Repo.one()
+    |> repo().one()
   end
 
   @doc """
@@ -87,7 +87,7 @@ defmodule Rauversion.Playlists do
       ** (Ecto.NoResultsError)
 
   """
-  def get_playlist!(id), do: Repo.get!(Playlist, id)
+  def get_playlist!(id), do: repo().get!(Playlist, id)
 
   @doc """
   Creates a playlist.
@@ -105,7 +105,7 @@ defmodule Rauversion.Playlists do
     %Playlist{}
     |> Playlist.changeset(attrs)
     |> Ecto.Changeset.cast_assoc(:track_playlists)
-    |> Repo.insert()
+    |> repo().insert()
   end
 
   def preload_playlists_preloaded_by_user(_current_user = %{id: id}) do
@@ -136,7 +136,7 @@ defmodule Rauversion.Playlists do
     playlist
     |> Playlist.changeset(attrs)
     |> Playlist.process_one_upload(attrs, "cover")
-    |> Repo.update()
+    |> repo().update()
   end
 
   @doc """
@@ -152,7 +152,7 @@ defmodule Rauversion.Playlists do
 
   """
   def delete_playlist(%Playlist{} = playlist) do
-    Repo.delete(playlist)
+    repo().delete(playlist)
   end
 
   @doc """

@@ -24,7 +24,7 @@ defmodule RauversionExtension.UI.ConnCase do
       import Phoenix.ConnTest
       import RauversionExtension.UI.ConnCase
 
-      alias RauversionWeb.Router.Helpers, as: Routes
+      import RauversionExtension
 
       # The default endpoint for testing
       @endpoint RauversionWeb.Endpoint
@@ -32,7 +32,7 @@ defmodule RauversionExtension.UI.ConnCase do
   end
 
   setup tags do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Rauversion.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(RauversionExtension.repo(), shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

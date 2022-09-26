@@ -2,7 +2,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
   use RauversionExtension.UI.Web.ConnCase, async: true
 
   alias Rauversion.Accounts
-  alias Rauversion.Repo
+  import RauversionExtension
   import Rauversion.AccountsFixtures
 
   setup do
@@ -27,7 +27,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.get_by!(Accounts.UserToken, user_id: user.id).context == "reset_password"
+      assert repo().get_by!(Accounts.UserToken, user_id: user.id).context == "reset_password"
     end
 
     test "does not send reset password token if email is invalid", %{conn: conn} do
@@ -38,7 +38,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.all(Accounts.UserToken) == []
+      assert repo().all(Accounts.UserToken) == []
     end
   end
 

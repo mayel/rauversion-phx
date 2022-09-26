@@ -1,7 +1,7 @@
 defmodule RauversionExtension.UI.QrLive.Index do
   use RauversionExtension.UI.Web, :live_view
   alias Rauversion.{PurchasedTickets, Repo}
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   @impl true
   def mount(%{"signed_id" => signed_id}, _session, socket) do
@@ -51,7 +51,7 @@ defmodule RauversionExtension.UI.QrLive.Index do
 
   defp get_ticket(id) do
     PurchasedTickets.find_by_signed_id!(id)
-    |> Repo.preload([:user, [event_ticket: :event]])
+    |> repo().preload([:user, [event_ticket: :event]])
   end
 
   defp gen_qr(ticket) do

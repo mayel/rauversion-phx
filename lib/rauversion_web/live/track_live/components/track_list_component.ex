@@ -38,13 +38,13 @@ defmodule RauversionExtension.UI.TrackLive.TrackListComponent do
   # end
 
   defp list_tracks(page, assigns = %{current_user: %{id: _}}) do
-    Tracks.list_tracks_by_username(assigns.profile.username)
+    Tracks.list_tracks_by_username(assigns.profile |> username())
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
     |> repo().paginate(page: page, page_size: 5)
   end
 
   defp list_tracks(page, assigns = %{current_user: nil}) do
-    Tracks.list_tracks_by_username(assigns.profile.username)
+    Tracks.list_tracks_by_username(assigns.profile |> username())
     |> Tracks.preload_tracks_preloaded_by_user(assigns[:current_user])
     |> Tracks.with_processed()
     |> Tracks.published()

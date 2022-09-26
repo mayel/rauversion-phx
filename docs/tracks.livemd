@@ -39,7 +39,7 @@ Rauversion.Tracks.reprocess_peaks(track)
 
 ```elixir
 CountByDateQuery.top_listeners(user.id)
-|> Enum.map(fn x -> %{count: x.count, user: x.user.username} end)
+|> Enum.map(fn x -> %{count: x.count, user: x |> username()} end)
 ```
 
 ```elixir

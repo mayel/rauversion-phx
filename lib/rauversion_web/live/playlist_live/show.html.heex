@@ -18,10 +18,10 @@
 <% #= live_redirect "Back", to: routes().playlist_index_path(@socket, :index) %>
 
 
-<% #= @current_user.username %> 
+<% #= @current_user |> username() %> 
 
 <%= if assigns[:share_track] do %>
-  <.modal return_to={routes().profile_index_path(@socket, :index, @share_track.user.username)}>
+  <.modal return_to={routes().profile_index_path(@socket, :index, @share_track |> username())}>
     <.live_component
       id={"share-track-modal-#{@share_track.id}"}
       module={RauversionExtension.UI.ProfileLive.ShareTrackComponent}
@@ -92,7 +92,7 @@
                   </h4>
                   <%= if @playlist.user do %>
                     <h5 class="text-sm font-">
-                    <%= live_redirect @playlist.user.username, to: routes().profile_index_path(@socket, :index, @playlist.user.username) %>
+                    <%= live_redirect @playlist |> username(), to: routes().profile_index_path(@socket, :index, @playlist |> username()) %>
                     </h5>
                   <% end  %>
                 </div>
@@ -129,7 +129,7 @@
             <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
               <h1 class="text-2xl font-bold text-gray-900  dark:text-gray-100 truncate">
                 <%= if @playlist.user do %>
-                  <%= live_redirect @playlist.user.username, to: routes().profile_index_path(@socket, :index, "@playlist.user.username") %>
+                  <%= live_redirect @playlist |> username(), to: routes().profile_index_path(@socket, :index, "@playlist |> username()") %>
                 <% end  %>
               </h1>
             </div>

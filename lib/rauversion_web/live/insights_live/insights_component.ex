@@ -125,7 +125,7 @@ defmodule RauversionExtension.UI.InsightsLive.InsightComponent do
                         <%= img_tag(Rauversion.Accounts.avatar_url(item.user), class: "h-8 w-8 rounded-full") %>
                       </div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.user.username %> </p>
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item |> username() %> </p>
 
                         <div class="text-sm text-gray-500 space-x-2 flex items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

@@ -35,7 +35,7 @@ defmodule Rauversion.Repo.Migrations.CreateEvent do
       add :scheduling_settings, :map
       add :event_settings, :map
       add :tickets, :map
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, RauversionExtension.user_table_reference()
 
       timestamps()
     end

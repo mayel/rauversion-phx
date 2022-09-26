@@ -7,7 +7,7 @@ defmodule Rauversion.Repo.Migrations.CreatePlaylists do
       add :description, :text
       add :title, :string
       add :metadata, :map
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, RauversionExtension.user_table_reference()
 
       timestamps()
     end

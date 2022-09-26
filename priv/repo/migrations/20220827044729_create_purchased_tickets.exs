@@ -7,7 +7,7 @@ defmodule Rauversion.Repo.Migrations.CreatePurchasedTickets do
       add :data, :map
       add :checked_in, :boolean
       add :checked_in_at, :utc_datetime
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, RauversionExtension.user_table_reference()
       add :event_ticket_id, references(:event_tickets, on_delete: :nothing)
 
       timestamps()

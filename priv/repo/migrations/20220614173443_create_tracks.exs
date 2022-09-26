@@ -10,7 +10,7 @@ defmodule Rauversion.Repo.Migrations.CreateTracks do
       add :caption, :text
       add :notification_settings, :map
       add :metadata, :map
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, RauversionExtension.user_table_reference()
 
       timestamps()
     end

@@ -16,6 +16,13 @@ defmodule RauversionExtension do
   # ])
 
   def user_schema, do: Application.get_env(:rauversion_extension, :user_schema, Rauversion.Accounts.User)
+  def user_table, do: Application.get_env(:rauversion_extension, :user_table, :users)
+  def user_key_type, do: Application.get_env(:rauversion_extension, :user_key_type, :bigserial)
+  def user_table_reference, do: Ecto.Migration.references(user_table(),
+      type: user_key_type(),
+      on_update: :update_all,
+      on_delete: :restrict
+    )
 
   def repo, do: Application.get_env(:rauversion_extension, :repo_module, Rauversion.Repo)
 

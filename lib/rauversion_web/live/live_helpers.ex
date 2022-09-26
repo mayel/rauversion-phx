@@ -184,7 +184,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
         data_phx_update: "ignore"
       )
 
-    assigns = LiveView.assign(%{__changed__: nil}, attrs: attrs)
+    assigns = assign(%{__changed__: nil}, attrs: attrs)
 
     ~H"""
       <audio controls>
@@ -195,7 +195,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :text_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -214,7 +214,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :number_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -233,7 +233,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -253,7 +253,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :datetime_input}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -272,7 +272,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -293,7 +293,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :date_select}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -312,7 +312,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :radio}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -343,7 +343,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :checkbox}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={"#{@field.wrapper_class}"}>
@@ -372,7 +372,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :textarea}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
       <div class={@field.wrapper_class}>
@@ -392,7 +392,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def form_input_renderer(f, field = %{type: :upload}) do
-    assigns = LiveView.assign(%{__changed__: nil}, field: field, form: f)
+    assigns = assign(%{__changed__: nil}, field: field, form: f)
 
     ~H"""
 
@@ -462,7 +462,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def render_attribution_fields(f) do
-    assigns = LiveView.assign(%{__changed__: nil}, f: f)
+    assigns = assign(%{__changed__: nil}, f: f)
 
     ~H"""
     <%= if Map.get(f.params, "copyright") == "common" || (Map.get(f.data, :copyright) == "common" && Map.get(f.params, "copyright") != "common") do %>
@@ -517,4 +517,9 @@ defmodule RauversionExtension.UI.LiveHelpers do
         []
     end
   end
+
+  def username(%{user: user}), do: username(user)
+  def username(%{character: %{username: username}}), do: username
+  def username(%{username: username}), do: username
+  def username(_), do: nil
 end

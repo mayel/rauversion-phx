@@ -10,7 +10,7 @@ defmodule RauversionExtension.UI.TrackLive.SharerComponent do
         } = assigns
       ) do
     track = assigns.track
-    title = "#{track.title} by #{track.user.username}"
+    title = "#{track.title} by #{track |> username()}"
 
     ~H"""
 

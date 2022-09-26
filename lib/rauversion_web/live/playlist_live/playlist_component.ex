@@ -74,7 +74,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistComponent do
                         </div>
                         <div class="flex-1 min-w-0">
                           <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= track_playlists.track.title %></p>
-                          <p class="text-sm text-gray-500 truncate"><%= @playlist.user.username  %></p>
+                          <p class="text-sm text-gray-500 truncate"><%= @playlist |> username()  %></p>
                         </div>
                         <!--
                         <div>

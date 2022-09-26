@@ -44,7 +44,7 @@ defmodule RauversionExtension.UI.Live.EventsLive.Components.AttendeesComponent d
 
                 <tr>
                   <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-100 sm:w-auto sm:max-w-none sm:pl-6">
-                    <%= ticket.user.username %>
+                    <%= ticket |> username() %>
                     <dl class="font-normal lg:hidden">
                       <dt class="sr-only">Status</dt>
                       <dd class="mt-1 truncate text-gray-700 dark:text-gray-300"><%= ticket.state %></dd>

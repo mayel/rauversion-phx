@@ -6,7 +6,7 @@
   title={@title}
   current_user={@current_user}
   profile={@profile}
-  username={@profile.username}
+  username={@profile |> username()}
 />
 
 <div class="flex">

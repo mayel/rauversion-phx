@@ -262,7 +262,7 @@ defmodule RauversionExtension.UI.TrackLive.Player do
 
                   <div class="flex-grow w-0-- leading-6">
                     <%= live_redirect to: routes().track_show_path(@socket, :show, @track), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
-                      <%= @track.user.username %>
+                      <%= @track |> username() %>
                     <% end %>
 
                     <div class="flex items-center w-full h-4 text-zinc-800">
@@ -357,7 +357,7 @@ defmodule RauversionExtension.UI.TrackLive.Player do
                               </div>
                               <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"><%= item.title %></p>
-                                <p class="text-sm text-gray-500 truncate"><%= item.user.username %></p>
+                                <p class="text-sm text-gray-500 truncate"><%= item |> username() %></p>
                               </div>
                               <div class="">
                                 <a href="#"

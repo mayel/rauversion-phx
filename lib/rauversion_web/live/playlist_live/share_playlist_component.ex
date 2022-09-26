@@ -131,7 +131,7 @@ defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistComponent do
                   title="waverzap"
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
-                  <%= track.user.username %>
+                  <%= track |> username() %>
                 </a>
                 ·
                 <a

@@ -1,5 +1,5 @@
 
-<% #= @current_user.username %>
+<% #= @current_user |> username() %>
 
 <.live_component
   module={RauversionExtension.UI.TrackLive.FormComponent}

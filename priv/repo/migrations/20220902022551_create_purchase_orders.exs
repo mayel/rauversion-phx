@@ -7,7 +7,7 @@ defmodule Rauversion.Repo.Migrations.CreatePurchaseOrders do
       add :promo_code, :string
       add :data, :map
       add :state, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, RauversionExtension.user_table_reference()
 
       timestamps()
     end

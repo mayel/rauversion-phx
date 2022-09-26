@@ -22,8 +22,8 @@ defmodule Rauversion.Repo.Migrations.CreateTrackEvent do
       add :bot, :boolean
       add :search_engine, :boolean
 
-      add :resource_profile_id, references(:users, on_delete: :nothing)
-      add :user_id, references(:users, on_delete: :nothing)
+      add :resource_profile_id, RauversionExtension.user_table_reference()
+      add :user_id, RauversionExtension.user_table_reference()
       add :track_id, references(:tracks, on_delete: :nothing)
       add :playlist_id, references(:tracks, on_delete: :nothing)
 

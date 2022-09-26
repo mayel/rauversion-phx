@@ -87,7 +87,7 @@ defmodule RauversionExtension.UI.PlaylistLive.Show do
     %{
       title: "#{playlist.title} on Rauversion",
       description:
-        "Listen to #{playlist.title}, a playlist curated by #{playlist.user.username} on Rauversion."
+        "Listen to #{playlist.title}, a playlist curated by #{playlist |> username()} on Rauversion."
       # url: "https://phoenix.meta.tags",
       # image: "https://phoenix.meta.tags/logo.png"
     }

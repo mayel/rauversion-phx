@@ -139,7 +139,7 @@ defmodule RauversionExtension.UI.PlaylistLive.CreateFormComponent do
                               <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                                 <%= @new_track.title %>
                               </p>
-                              <p class="text-sm text-gray-500 truncate"><%= @new_track.user.username %></p>
+                              <p class="text-sm text-gray-500 truncate"><%= @new_track |> username() %></p>
                             </div>
                             <div>
                               <a href="#" phx-click="remove-track" target={@ref} class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">

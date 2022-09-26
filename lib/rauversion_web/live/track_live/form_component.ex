@@ -125,6 +125,7 @@ defmodule RauversionExtension.UI.TrackLive.FormComponent do
   defp save_track(socket, :new, %{"track" => track_params} = params) do
     case socket.assigns.step do
       %{name: "upload"} ->
+        IO.inspect(track_params, label: "track_params!")
         case Tracks.create_track(track_params) do
           {:ok, track} ->
             IO.inspect("SUCCESSS!")
@@ -141,7 +142,7 @@ defmodule RauversionExtension.UI.TrackLive.FormComponent do
           # |> push_redirect(to: socket.assigns.return_to)}
 
           {:error, %Ecto.Changeset{} = changeset} ->
-            IO.inspect("ERORORORR")
+            IO.inspect(changeset, label: "ERORORORR")
             {:noreply, assign(socket, changeset: changeset)}
         end
 

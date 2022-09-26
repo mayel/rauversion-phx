@@ -31,7 +31,7 @@ defmodule RauversionExtension.UI.PlaylistLive.SharePlaylistButtonComponent do
     <div>
 
       <%= if @share_track do %>
-        <.modal return_to={routes().profile_index_path(@socket, :index, playlist.user.username)}>
+        <.modal return_to={routes().profile_index_path(@socket, :index, playlist |> username())}>
           <.live_component
             id={"share-track-modal-#{@share_track.id}"}
             module={RauversionExtension.UI.PlaylistLive.SharePlaylistComponent}

@@ -120,7 +120,7 @@ defmodule RauversionExtension.UI.EventsLive.UserEventsListComponent do
                       </td>
 
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
-                        <%= event.user.username %>
+                        <%= event |> username() %>
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200 dark:bg-gray-900">
                         <%= event.state %>

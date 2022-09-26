@@ -124,7 +124,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
   defp metatags(socket, track) do
     %{
       title: "#{track.title} on Rauversion",
-      description: "Stream #{track.title} by #{track.user.username} on Rauversion.",
+      description: "Stream #{track.title} by #{track |> username()} on Rauversion.",
       image:
         Application.get_env(:rauversion, :domain) <>
           Rauversion.Tracks.variant_url(track, "cover", %{resize_to_limit: "360x360"}),

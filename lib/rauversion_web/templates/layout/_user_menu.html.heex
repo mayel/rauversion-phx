@@ -102,7 +102,7 @@
                     <%= live_redirect gettext("Settings"), 
                         to: "/users/settings", 
                        class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
-                    <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user |> username()), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
 
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
@@ -150,7 +150,7 @@
             <%= img_tag(Rauversion.Accounts.avatar_url(@current_user), class: "h-10 w-10 rounded-full") %>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-white"><%= @current_user.username %></div>
+            <div class="text-base font-medium text-white"><%= @current_user |> username() %></div>
             <div class="text-sm font-medium text-gray-200"><%= @current_user.email %></div>
           </div>
           <button type="button" class="ml-auto flex-shrink-0 bg-gray-500 rounded-full p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:ring-white">
@@ -165,7 +165,7 @@
 
           <%= if @current_user do %>
             <%= live_redirect gettext("Settings"), to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
-            <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user |> username()), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "Support" %></a> -->
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "License" %></a> -->
             <%= link gettext("Log out"), to: routes().user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>

@@ -106,7 +106,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackListingComponent do
             <%= track.title %>
           </h3>
           <p class="mt-1 text-lg font-medium text-gray-900 dark:text-gray-100 ">
-            <%= track.user.username %>
+            <%= track |> username() %>
           </p>
         <% end %>
       <% end %>

@@ -13,7 +13,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackComponent do
     struct = %{
       id: track.id,
       title: track.title,
-      username: track.user.username
+      username: track |> username()
     }
 
     {:noreply, push_event(socket, "add-to-next", %{value: struct})}
@@ -88,7 +88,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackComponent do
                   </h4>
                   <h5 class="text-sm font-">
                     <%= case track.user do
-                      %{id: _} ->  track.user.username
+                      %{id: _} ->  track |> username()
                       _ -> ""
                     end %>
                   </h5>

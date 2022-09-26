@@ -11,7 +11,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
   describe "GET /users/reset_password" do
     test "renders the reset password page", %{conn: conn} do
-      conn = get(conn, Routes.user_reset_password_path(conn, :new))
+      conn = get(conn, routes().user_reset_password_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "Forgot your password?"
     end
@@ -21,7 +21,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
     @tag :capture_log
     test "sends a new reset password token", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.user_reset_password_path(conn, :create), %{
+        post(conn, routes().user_reset_password_path(conn, :create), %{
           "user" => %{"email" => user.email}
         })
 
@@ -32,7 +32,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
     test "does not send reset password token if email is invalid", %{conn: conn} do
       conn =
-        post(conn, Routes.user_reset_password_path(conn, :create), %{
+        post(conn, routes().user_reset_password_path(conn, :create), %{
           "user" => %{"email" => "unknown@example.com"}
         })
 
@@ -53,12 +53,12 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
     end
 
     test "renders reset password", %{conn: conn, token: token} do
-      conn = get(conn, Routes.user_reset_password_path(conn, :edit, token))
+      conn = get(conn, routes().user_reset_password_path(conn, :edit, token))
       assert html_response(conn, 200) =~ "Reset Password"
     end
 
     test "does not render reset password with invalid token", %{conn: conn} do
-      conn = get(conn, Routes.user_reset_password_path(conn, :edit, "oops"))
+      conn = get(conn, routes().user_reset_password_path(conn, :edit, "oops"))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) =~ "Reset password link is invalid or it has expired"
     end
@@ -76,14 +76,14 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
     test "resets password once", %{conn: conn, user: user, token: token} do
       conn =
-        put(conn, Routes.user_reset_password_path(conn, :update, token), %{
+        put(conn, routes().user_reset_password_path(conn, :update, token), %{
           "user" => %{
             "password" => "new valid password",
             "password_confirmation" => "new valid password"
           }
         })
 
-      assert redirected_to(conn) == Routes.user_session_path(conn, :new)
+      assert redirected_to(conn) == routes().user_session_path(conn, :new)
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Password reset successfully"
       assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
@@ -91,7 +91,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
 
     test "does not reset password on invalid data", %{conn: conn, token: token} do
       conn =
-        put(conn, Routes.user_reset_password_path(conn, :update, token), %{
+        put(conn, routes().user_reset_password_path(conn, :update, token), %{
           "user" => %{
             "password" => "short",
             "password_confirmation" => "does not match"
@@ -105,7 +105,7 @@ defmodule RauversionExtension.UI.UserResetPasswordControllerTest do
     end
 
     test "does not reset password with invalid token", %{conn: conn} do
-      conn = put(conn, Routes.user_reset_password_path(conn, :update, "oops"))
+      conn = put(conn, routes().user_reset_password_path(conn, :update, "oops"))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) =~ "Reset password link is invalid or it has expired"
     end

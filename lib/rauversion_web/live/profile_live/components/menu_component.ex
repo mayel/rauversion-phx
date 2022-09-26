@@ -26,7 +26,7 @@ defmodule RauversionExtension.UI.ProfileLive.MenuComponent do
 
           <%= if @current_user && @current_user.id == @profile.id do %>
             <div class="flex items-center md:ml-12">
-              <%= live_redirect gettext( "Your insights"), to: Routes.profile_index_path(@socket, :insights, @username), class: "text-base font-medium text-gray-500 hover:text-gray-900  dark:text-gray-300 dark:hover:text-gray-100" %>
+              <%= live_redirect gettext( "Your insights"), to: routes().profile_index_path(@socket, :insights, @username), class: "text-base font-medium text-gray-500 hover:text-gray-900  dark:text-gray-300 dark:hover:text-gray-100" %>
             </div>
           <% end %>
         </div>

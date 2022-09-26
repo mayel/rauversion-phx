@@ -248,7 +248,7 @@ defmodule RauversionExtension.UI.TrackLive.Player do
                 </div>
 
                 <div class="flex items-center h-full leading-4 text-zinc-300">
-                  <%= live_redirect to: Routes.track_show_path(@socket, :show, @track), class: "float-left my-0 mr-2 ml-0 text-blue-500 cursor-pointer hover:text-zinc-100" do %>
+                  <%= live_redirect to: routes().track_show_path(@socket, :show, @track), class: "float-left my-0 mr-2 ml-0 text-blue-500 cursor-pointer hover:text-zinc-100" do %>
                     <div
                       class="block relative w-8 h-8 text-center bg-no-repeat bg-cover"
                       style="height: 30px; width: 30px;">
@@ -261,12 +261,12 @@ defmodule RauversionExtension.UI.TrackLive.Player do
                   <% end %>
 
                   <div class="flex-grow w-0-- leading-6">
-                    <%= live_redirect to: Routes.track_show_path(@socket, :show, @track), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
+                    <%= live_redirect to: routes().track_show_path(@socket, :show, @track), class: "flex items-center w-full h-4 text-xs cursor-pointer truncate text-neutral-200 focus:text-black hover:text-neutral-300", title: @track.title do %>
                       <%= @track.user.username %>
                     <% end %>
 
                     <div class="flex items-center w-full h-4 text-zinc-800">
-                      <%= live_redirect to: Routes.track_show_path(@socket, :show, @track), class: "text-xs cursor-pointer truncate text-stone-200 focus:text-black hover:text-neutral-200", title: @track.title  do %>
+                      <%= live_redirect to: routes().track_show_path(@socket, :show, @track), class: "text-xs cursor-pointer truncate text-stone-200 focus:text-black hover:text-neutral-200", title: @track.title  do %>
                         <span class="sr-only">Current track: <%= @track.title %></span>
                         <span aria-hidden="true" class="whitespace-nowrap"><%= @track.title %></span>
                       <% end %>

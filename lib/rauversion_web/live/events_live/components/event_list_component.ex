@@ -35,7 +35,7 @@ defmodule RauversionExtension.UI.EventsLive.EventsListComponent do
 
               <%= for event <- @events do %>
 
-                <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, event.slug), class: "group text-sm" do %>
+                <%= live_redirect to: routes().events_show_path(assigns.socket, :show, event.slug), class: "group text-sm" do %>
                   <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-900 group-hover:opacity-75">
                     <%= img_tag(Rauversion.Events.Event.variant_url( event, "cover", %{resize_to_limit: "500x500"}), class: "w-full h-full object-center object-cover") %>
                   </div>

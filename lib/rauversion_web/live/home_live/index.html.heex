@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="w-full h-48 sm:h-64 lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full">
-          <img src={ Routes.static_path(@socket, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
+          <img src={ routes().static_path(@socket, "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png")} class="w-full h-full object-center object-cover" />
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
                       <%= track.user.username %>
                     </p>
                     <h3 class="mt-1 font-semibold text-gray-900 dark:text-gray-100">
-                      <%= live_redirect to: Routes.track_show_path(@socket, :show, track) do %>
+                      <%= live_redirect to: routes().track_show_path(@socket, :show, track) do %>
                         <span class="absolute inset-0"></span>
                         <%= track.title %>
                       <% end %>
@@ -160,7 +160,7 @@
                   </div>
 
                   <h3 class="mt-6 text-sm text-gray-500">
-                    <%= live_redirect to: Routes.playlist_show_path(@socket, :show, playlist) do %>
+                    <%= live_redirect to: routes().playlist_show_path(@socket, :show, playlist) do %>
                       <span class="absolute inset-0"></span>
                       <%= playlist.title %>
                     <% end %>

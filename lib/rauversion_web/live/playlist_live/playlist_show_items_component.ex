@@ -28,7 +28,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistShowItemsComponent do
                           </p>
                           <p class="text-sm text-gray-500 truncate">
                             <%= live_redirect track_playlists.track.user.username,
-                              to: Routes.profile_index_path(@socket, :index, track_playlists.track.user.username)
+                              to: routes().profile_index_path(@socket, :index, track_playlists.track.user.username)
 
                             %>
                           </p>

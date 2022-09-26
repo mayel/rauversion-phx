@@ -1,7 +1,7 @@
 <h1>Listing Playlists</h1>
 
 <%= if @live_action in [:new, :edit] do %>
-  <.modal return_to={Routes.playlist_index_path(@socket, :index)}>
+  <.modal return_to={routes().playlist_index_path(@socket, :index)}>
     <.live_component
       module={RauversionExtension.UI.PlaylistLive.FormComponent}
       id={@playlist.id || :new}
@@ -9,7 +9,7 @@
       action={@live_action}
       playlist={@playlist}
       current_user={@current_user}
-      return_to={Routes.playlist_index_path(@socket, :index)}
+      return_to={routes().playlist_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
@@ -36,8 +36,8 @@
         <td><%= playlist.metadata %></td>
 
         <td>
-          <span><%= live_redirect gettext("Show"), to: Routes.playlist_show_path(@socket, :show, playlist) %></span>
-          <span><%= live_patch gettext("Edit"), to: Routes.playlist_index_path(@socket, :edit, playlist) %></span>
+          <span><%= live_redirect gettext("Show"), to: routes().playlist_show_path(@socket, :show, playlist) %></span>
+          <span><%= live_patch gettext("Edit"), to: routes().playlist_index_path(@socket, :edit, playlist) %></span>
           <span><%= link gettext("Delete"), to: "#", phx_click: "delete", phx_value_id: playlist.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
@@ -45,4 +45,4 @@
   </tbody>
 </table>
 
-<span><%= live_patch gettext("New Playlist"), to: Routes.playlist_index_path(@socket, :new) %></span>
+<span><%= live_patch gettext("New Playlist"), to: routes().playlist_index_path(@socket, :new) %></span>

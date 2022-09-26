@@ -1,5 +1,6 @@
 defmodule RauversionExtension.UI.TrackLive.Show do
   use RauversionExtension.UI.Web, :live_view
+  on_mount UserAuthLiveMount
 
   alias Rauversion.{Tracks, Repo, Accounts}
   alias RauversionExtension.UI.TrackLive.Step
@@ -128,7 +129,7 @@ defmodule RauversionExtension.UI.TrackLive.Show do
         Application.get_env(:rauversion, :domain) <>
           Rauversion.Tracks.variant_url(track, "cover", %{resize_to_limit: "360x360"}),
       "twitter:player":
-        Application.get_env(:rauversion, :domain) <> Routes.embed_path(socket, :show, track),
+        Application.get_env(:rauversion, :domain) <> routes().embed_path(socket, :show, track),
       twitter: %{
         card: "player",
         player: %{

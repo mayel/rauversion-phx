@@ -21,7 +21,7 @@ defmodule RauversionExtension.UI.TrackLive.SharerComponent do
           type="button"
           class="text-blue-500 flex space-x-2"
           tabindex="0"
-          href={"https://twitter.com/intent/tweet?#{Routes.track_show_url(@socket, :show, assigns.track,
+          href={"https://twitter.com/intent/tweet?#{routes().track_show_url(@socket, :show, assigns.track,
           utm_source: "twitter",
           utm_medium: "post",
           utm_campaign: "social_sharing",
@@ -41,7 +41,7 @@ defmodule RauversionExtension.UI.TrackLive.SharerComponent do
           type="button"
           class="text-blue-500 flex space-x-2"
           tabindex="0"
-          href={"https://www.facebook.com/sharer/sharer.php?u=#{Routes.track_show_url(@socket, :show, assigns.track,
+          href={"https://www.facebook.com/sharer/sharer.php?u=#{routes().track_show_url(@socket, :show, assigns.track,
           utm_source: "facebook",
           utm_medium: "post",
           utm_campaign: "social_sharing"

@@ -4,7 +4,7 @@
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0 flex items-center">
             <%= live_redirect to: "/", class: "flex items-center space-x-3 text-white sm:text-2xl text-sm font-extrabold" do %>
-              <img class="h-12 w-auto" src={ Routes.static_path(@conn, "/images/logo.png")} alt="">
+              <img class="h-12 w-auto" src={ routes().static_path(@conn, "/images/logo.png")} alt="">
 
               <span>RAUVERSION</span> 
               <% #= RauversionExtension.UI.Gettext |> Gettext.get_locale %>
@@ -22,12 +22,12 @@
               <% end %>
 
               <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-                <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+                <% #= link "LiveDashboard", to: routes().live_dashboard_path(@conn, :home), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
               <% # end %>
 
               <%= if !@current_user do %>
-                <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
-                <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+                <%= link gettext("Register"), to: routes().user_registration_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
+                <%= link gettext("Log in"), to: routes().user_session_path(@conn, :new), class: "rounded-md py-2 px-3 text-sm font-medium text-white hover:bg-gray-800" %>
               <% end  %>
           </div>
         </div>
@@ -102,11 +102,11 @@
                     <%= live_redirect gettext("Settings"), 
                         to: "/users/settings", 
                        class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"  %>
-                    <%= live_redirect gettext("Profile"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user.username), class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
 
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">Support</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300">License</a>
-                    <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
+                    <%= link gettext("Log out"), to: routes().user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
                   
                     <div class="flex items-center space-x-2">
                       <%= new_locale @conn, :en, "EN", "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300" %>
@@ -135,12 +135,12 @@
           <%= live_redirect gettext("Account"), to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800"%>
 
           <% #= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-            <% #= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+            <% #= link "LiveDashboard", to: routes().live_dashboard_path(@conn, :home), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
           <% # end %>
 
           <%= if !@current_user do %>
-            <%= link gettext("Register"), to: Routes.user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
-            <%= link gettext("Log in"), to: Routes.user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+            <%= link gettext("Register"), to: routes().user_registration_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
+            <%= link gettext("Log in"), to: routes().user_session_path(@conn, :new), class: "block rounded-md py-2 px-3 text-base font-medium text-white hover:text-white hover:bg-gray-800" %>
           <% end %>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-500">
@@ -165,10 +165,10 @@
 
           <%= if @current_user do %>
             <%= live_redirect gettext("Settings"), to: "/users/settings", class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
-            <%= live_redirect gettext("Profile"), to: Routes.profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <%= live_redirect gettext("Profile"), to: routes().profile_index_path(@conn, :index, @current_user.username), class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "Support" %></a> -->
             <!-- <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800"><%= gettext "License" %></a> -->
-            <%= link gettext("Log out"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
+            <%= link gettext("Log out"), to: routes().user_session_path(@conn, :delete), method: :delete, class: "block rounded-md py-2 px-3 text-base font-medium text-gray-200 hover:text-white hover:bg-gray-800" %>
           <% end %>
 
         </div>

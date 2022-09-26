@@ -161,7 +161,7 @@ defmodule RauversionExtension.UI.PlaylistLive.CreateFormComponent do
 
           <% else %>
             <%= @playlist.title %>
-            <%= live_redirect "Go to playlist", to: Routes.playlist_show_path(@socket, :show, @playlist) %>
+            <%= live_redirect "Go to playlist", to: routes().playlist_show_path(@socket, :show, @playlist) %>
           <% end %>
 
           </section>

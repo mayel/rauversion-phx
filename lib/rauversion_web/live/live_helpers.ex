@@ -18,13 +18,13 @@ defmodule RauversionExtension.UI.LiveHelpers do
 
   ## Examples
 
-      <.modal return_to={Routes.track_index_path(@socket, :index)}>
+      <.modal return_to={routes().track_index_path(@socket, :index)}>
         <.live_component
           module={RauversionExtension.UI.TrackLive.FormComponent}
           id={@track.id || :new}
           title={@page_title}
           action={@live_action}
-          return_to={Routes.track_index_path(@socket, :index)}
+          return_to={routes().track_index_path(@socket, :index)}
           track: @track
         />
       </.modal>
@@ -154,8 +154,8 @@ defmodule RauversionExtension.UI.LiveHelpers do
   end
 
   def get_user_by_session(socket, session) do
-    if session["user_token"] do
-      user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+    if socket.assigns[:current_user] || session["user_token"] do
+      user = socket.assigns[:current_user] || Rauversion.Accounts.get_user_by_session_token(session["user_token"])
 
       socket
       |> assign(:current_user, user)
@@ -509,7 +509,7 @@ defmodule RauversionExtension.UI.LiveHelpers do
 
             # dest = Path.join("priv/static/uploads", Path.basename(path))
             # File.cp!(path, dest)
-            # Routes.static_path(socket, "/uploads/#{Path.basename(dest)}")
+            # routes().static_path(socket, "/uploads/#{Path.basename(dest)}")
           end)
         end)
 

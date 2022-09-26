@@ -5,12 +5,12 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
   use RauversionExtension.UI.Web, :live_component
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: false}) do
-    url = Routes.embed_url(socket, :private, Rauversion.Tracks.signed_id(track))
+    url = routes().embed_url(socket, :private, Rauversion.Tracks.signed_id(track))
     iframe_code_string(url, track)
   end
 
   def iframe_code(socket, track = %Rauversion.Tracks.Track{private: true}) do
-    url = Routes.embed_url(socket, :show, track)
+    url = routes().embed_url(socket, :show, track)
     iframe_code_string(url, track)
   end
 
@@ -45,7 +45,7 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
                   <div class="flex items-center space-x-3">
                     <input
                       type="text"
-                      value={Application.get_env(:rauversion, :domain) <> Routes.track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
+                      value={Application.get_env(:rauversion, :domain) <> routes().track_show_path(@socket, :private, Rauversion.Tracks.signed_id(track), utm_source: "clipboard", utm_campaign: "social_sharing", utm_medium: "text" )}
                       class="shadow-sm focus:ring-brand-500 focus:border-brand-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-900 dark:text-gray-100"
                       readonly="readonly"/>
 
@@ -135,7 +135,7 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
-                src={Routes.embed_url(@socket, :show, track)}>
+                src={routes().embed_url(@socket, :show, track)}>
               </iframe>
               <div
                 style="font-size: 10px;
@@ -149,7 +149,7 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
                   Garuda, Verdana, Tahoma, sans-serif;
                   font-weight: 100;">
                 <a
-                  href={Routes.profile_index_path(@socket, :index, track.user)}
+                  href={routes().profile_index_path(@socket, :index, track.user)}
                   title="waverzap"
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">
@@ -157,7 +157,7 @@ defmodule RauversionExtension.UI.TrackLive.ShareTrackComponent do
                 </a>
                 ·
                 <a
-                  href={Routes.track_show_path(@socket, :show, track)}
+                  href={routes().track_show_path(@socket, :show, track)}
                   title={track.title}
                   target="_blank"
                   style="color: #cccccc; text-decoration: none;">

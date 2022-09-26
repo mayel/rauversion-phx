@@ -58,7 +58,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistComponent do
               <div class="space-y-2">
                 <h3 class="mt-3- text-xl font-extrabold tracking-tight text-slate-900 dark:text-gray-100">
                   <%= live_redirect @playlist.title,
-                    to: Routes.playlist_show_path(@socket, :show, @playlist)
+                    to: routes().playlist_show_path(@socket, :show, @playlist)
                   %>
                 </h3>
                 <ul role="list" class="-my-5 divide-y divide-gray-200 dark:divide-gray-800">
@@ -92,7 +92,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistComponent do
               </div>
 
               <div class="p-2 sm:p-0 sm:pt-2 flex items-center space-x-1" data-turbo="false">
-                <% #= live_redirect "Show", to: Routes.track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+                <% #= live_redirect "Show", to: routes().track_show_path(@socket, :show, track), class: "inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
 
                 <.live_component
                   id={"share-playlist-button-#{@playlist.id}"}
@@ -109,7 +109,7 @@ defmodule RauversionExtension.UI.PlaylistLive.PlaylistComponent do
                 <% end %>
 
                 <%= if @current_user && @current_user.id == @playlist.user_id do %>
-                  <%= live_patch to: Routes.playlist_show_path(@socket, :edit, @playlist), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+                  <%= live_patch to: routes().playlist_show_path(@socket, :edit, @playlist), class: "space-x-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 shadow-sm text-xs font-medium rounded text-gray-700 bg-white dark:text-gray-300 dark:bg-black  hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                     </svg>

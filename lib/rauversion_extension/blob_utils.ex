@@ -24,7 +24,7 @@ defmodule Rauversion.BlobUtils do
   end
 
   def fallback_image(url \\ nil) do
-    Routes.static_path(
+    routes().static_path(
       RauversionWeb.Endpoint,
       url || "/images/daniel-schludi-mbGxz7pt0jM-unsplash-sqr-s.png"
     )

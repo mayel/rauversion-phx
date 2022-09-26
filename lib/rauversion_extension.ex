@@ -2,6 +2,14 @@ defmodule RauversionExtension do
 
   # declare_extension("Rauversion", icon: "twemoji:musical-note")
 
+  def declared_extension, do: %{
+      name: "Rauversion",
+      module: RauversionExtension,
+      href: "/rauversion",
+      type: :link,
+      icon: "twemoji:musical-note"
+    }
+
   # declare_nav_link([
   #   {("Upload"), href: "/tracks/new", icon: "heroicons-solid:Collection"},
   #   {("Browse Tracks"), href: "/tracks", icon: "emojione:eyes"}

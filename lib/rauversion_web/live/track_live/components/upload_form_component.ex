@@ -97,7 +97,7 @@ defmodule RauversionExtension.UI.TrackLive.UploadFormComponent do
             <%= if @uploads.audio.entries |> Enum.any? do %>
               <div class="pt-5">
                 <div class="flex items-center justify-end">
-                  <%= live_redirect to: Routes.profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
+                  <%= live_redirect to: routes().profile_index_path(@socket, :index, @current_user.username), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" do %>
                     Cancel
                   <%end %>
                   <%= submit gettext("Continue"), phx_disable_with: gettext("Saving..."), class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" %>

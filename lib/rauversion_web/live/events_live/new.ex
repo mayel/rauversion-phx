@@ -7,7 +7,7 @@ defmodule RauversionExtension.UI.EventsLive.New do
 
   @impl true
   def mount(_params, session, socket) do
-    user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+    user = socket.assigns[:current_user] || Rauversion.Accounts.get_user_by_session_token(session["user_token"])
 
     {
       :ok,

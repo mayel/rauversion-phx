@@ -5,6 +5,7 @@ end
 
 defmodule RauversionExtension.UI.TrackLive.New do
   use RauversionExtension.UI.Web, :live_view
+  on_mount UserAuthLiveMount
 
   alias Rauversion.Tracks
   alias Rauversion.Tracks.Track
@@ -18,7 +19,7 @@ defmodule RauversionExtension.UI.TrackLive.New do
 
   @impl true
   def mount(_params, session, socket) do
-    user = Rauversion.Accounts.get_user_by_session_token(session["user_token"])
+    user = socket.assigns[:current_user] || Rauversion.Accounts.get_user_by_session_token(session["user_token"])
 
     socket =
       socket

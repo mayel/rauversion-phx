@@ -9,7 +9,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
 
   describe "GET /users/log_in" do
     test "renders log in page", %{conn: conn} do
-      conn = get(conn, Routes.user_session_path(conn, :new))
+      conn = get(conn, routes().user_session_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "Sign in to your account"
       assert response =~ "Register</a>"
@@ -17,7 +17,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
     end
 
     test "redirects if already logged in", %{conn: conn, user: user} do
-      conn = conn |> log_in_user(user) |> get(Routes.user_session_path(conn, :new))
+      conn = conn |> log_in_user(user) |> get(routes().user_session_path(conn, :new))
       assert redirected_to(conn) == "/"
     end
   end
@@ -25,7 +25,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
   describe "POST /users/log_in" do
     test "logs the user in", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.user_session_path(conn, :create), %{
+        post(conn, routes().user_session_path(conn, :create), %{
           "user" => %{"email" => user.email, "password" => valid_user_password()}
         })
 
@@ -42,7 +42,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
 
     test "logs the user in with remember me", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.user_session_path(conn, :create), %{
+        post(conn, routes().user_session_path(conn, :create), %{
           "user" => %{
             "email" => user.email,
             "password" => valid_user_password(),
@@ -58,7 +58,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
       conn =
         conn
         |> init_test_session(user_return_to: "/foo/bar")
-        |> post(Routes.user_session_path(conn, :create), %{
+        |> post(routes().user_session_path(conn, :create), %{
           "user" => %{
             "email" => user.email,
             "password" => valid_user_password()
@@ -70,7 +70,7 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
 
     test "emits error message with invalid credentials", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.user_session_path(conn, :create), %{
+        post(conn, routes().user_session_path(conn, :create), %{
           "user" => %{"email" => user.email, "password" => "invalid_password"}
         })
 
@@ -82,14 +82,14 @@ defmodule RauversionExtension.UI.UserSessionControllerTest do
 
   describe "DELETE /users/log_out" do
     test "logs the user out", %{conn: conn, user: user} do
-      conn = conn |> log_in_user(user) |> delete(Routes.user_session_path(conn, :delete))
+      conn = conn |> log_in_user(user) |> delete(routes().user_session_path(conn, :delete))
       assert redirected_to(conn) == "/"
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Logged out successfully"
     end
 
     test "succeeds even if the user is not logged in", %{conn: conn} do
-      conn = delete(conn, Routes.user_session_path(conn, :delete))
+      conn = delete(conn, routes().user_session_path(conn, :delete))
       assert redirected_to(conn) == "/"
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Logged out successfully"

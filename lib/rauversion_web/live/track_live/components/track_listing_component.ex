@@ -85,7 +85,7 @@ defmodule RauversionExtension.UI.TrackLive.TrackListingComponent do
       data-paginate-end={assigns.track_meta.total_pages == @page}>
 
       <%= for track <- @tracks do %>
-        <%= live_redirect to: Routes.track_show_path(@socket, :show, track), id: "track-item-#{track.id}" , class: "group" do %>
+        <%= live_redirect to: routes().track_show_path(@socket, :show, track), id: "track-item-#{track.id}" , class: "group" do %>
           <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
 
             <div

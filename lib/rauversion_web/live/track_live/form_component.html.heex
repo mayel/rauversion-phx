@@ -12,7 +12,7 @@
         target={@myself}
         current_user={@current_user}
         uploads={@uploads}
-        return_to={Routes.track_index_path(@socket, :index)}
+        return_to={routes().track_index_path(@socket, :index)}
       />
     <% end %>
 
@@ -26,7 +26,7 @@
         target={@myself}
         current_user={@current_user}
         uploads={@uploads}
-        return_to={Routes.track_index_path(@socket, :index)}
+        return_to={routes().track_index_path(@socket, :index)}
       />
     <% end %>
 
@@ -41,7 +41,7 @@
         current_user={@current_user}
         uploads={@uploads}
         current_tab={@current_tab}
-        return_to={Routes.track_index_path(@socket, :index)}
+        return_to={routes().track_index_path(@socket, :index)}
       />
     <% end %>
 

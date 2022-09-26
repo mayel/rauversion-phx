@@ -156,13 +156,13 @@ defmodule Rauversion.PurchaseOrders do
         },
         "mode" => "payment",
         "success_url" =>
-          Routes.events_show_url(
+          routes().events_show_url(
             RauversionWeb.Endpoint,
             :payment_success,
             event.slug
           ),
         "cancel_url" =>
-          Routes.events_show_url(
+          routes().events_show_url(
             RauversionWeb.Endpoint,
             :payment_cancel,
             event.slug

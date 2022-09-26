@@ -106,36 +106,36 @@ defmodule RauversionExtension.UI.ProfileLive.Index do
       %{
         name: "All",
         selected: kind == "all",
-        url: Routes.profile_index_path(socket, :index, id),
+        url: routes().profile_index_path(socket, :index, id),
         kind: kind
       },
       %{
         name: "Popular tracks",
-        url: Routes.profile_index_path(socket, :popular, id),
+        url: routes().profile_index_path(socket, :popular, id),
         selected: kind == "popular",
         kind: kind
       },
       %{
         name: "Tracks",
-        url: Routes.profile_index_path(socket, :tracks_all, id),
+        url: routes().profile_index_path(socket, :tracks_all, id),
         selected: kind == "tracks_all",
         kind: kind
       },
       %{
         name: "Albums",
-        url: Routes.profile_index_path(socket, :albums, id),
+        url: routes().profile_index_path(socket, :albums, id),
         selected: kind == "albums",
         kind: kind
       },
       %{
         name: "Playlists",
-        url: Routes.profile_index_path(socket, :playlists, id),
+        url: routes().profile_index_path(socket, :playlists, id),
         selected: kind == "playlists",
         kind: kind
       },
       %{
         name: "Reposts",
-        url: Routes.profile_index_path(socket, :reposts, id),
+        url: routes().profile_index_path(socket, :reposts, id),
         selected: kind == "reposts",
         kind: kind
       }

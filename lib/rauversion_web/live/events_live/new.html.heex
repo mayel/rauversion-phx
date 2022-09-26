@@ -11,7 +11,7 @@
   <div class="mt-6- text-gray-500 flex dark:bg-black dark:text-white w-full ">
 
     <div class="flex flex-col">
-      <%= live_redirect to: Routes.events_show_path(assigns.socket, :show, @event.slug), 
+      <%= live_redirect to: routes().events_show_path(assigns.socket, :show, @event.slug), 
       class: "self-end mr-4 inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-gray-900 hover:bg-gray-50" do %>
         View event
         <svg class="-mr-1 ml-3 h-5 w-5 text-gray-400" x-description="Heroicon name: mini/arrow-top-right-on-square" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

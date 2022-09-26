@@ -11,7 +11,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
 
   describe "GET /users/confirm" do
     test "renders the resend confirmation page", %{conn: conn} do
-      conn = get(conn, Routes.user_confirmation_path(conn, :new))
+      conn = get(conn, routes().user_confirmation_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "<h1>Resend confirmation instructions</h1>"
     end
@@ -21,7 +21,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
     @tag :capture_log
     test "sends a new confirmation token", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.user_confirmation_path(conn, :create), %{
+        post(conn, routes().user_confirmation_path(conn, :create), %{
           "user" => %{"email" => user.email}
         })
 
@@ -34,7 +34,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
       repo().update!(Accounts.User.confirm_changeset(user))
 
       conn =
-        post(conn, Routes.user_confirmation_path(conn, :create), %{
+        post(conn, routes().user_confirmation_path(conn, :create), %{
           "user" => %{"email" => user.email}
         })
 
@@ -45,7 +45,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
 
     test "does not send confirmation token if email is invalid", %{conn: conn} do
       conn =
-        post(conn, Routes.user_confirmation_path(conn, :create), %{
+        post(conn, routes().user_confirmation_path(conn, :create), %{
           "user" => %{"email" => "unknown@example.com"}
         })
 
@@ -57,11 +57,11 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
 
   describe "GET /users/confirm/:token" do
     test "renders the confirmation page", %{conn: conn} do
-      conn = get(conn, Routes.user_confirmation_path(conn, :edit, "some-token"))
+      conn = get(conn, routes().user_confirmation_path(conn, :edit, "some-token"))
       response = html_response(conn, 200)
       assert response =~ "<h1>Confirm account</h1>"
 
-      form_action = Routes.user_confirmation_path(conn, :update, "some-token")
+      form_action = routes().user_confirmation_path(conn, :update, "some-token")
       assert response =~ "action=\"#{form_action}\""
     end
   end
@@ -73,7 +73,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
           Accounts.deliver_user_confirmation_instructions(user, url)
         end)
 
-      conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
+      conn = post(conn, routes().user_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "User confirmed successfully"
       assert Accounts.get_user!(user.id).confirmed_at
@@ -81,7 +81,7 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
       assert repo().all(Accounts.UserToken) == []
 
       # When not logged in
-      conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
+      conn = post(conn, routes().user_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) =~ "User confirmation link is invalid or it has expired"
 
@@ -89,14 +89,14 @@ defmodule RauversionExtension.UI.UserConfirmationControllerTest do
       conn =
         build_conn()
         |> log_in_user(user)
-        |> post(Routes.user_confirmation_path(conn, :update, token))
+        |> post(routes().user_confirmation_path(conn, :update, token))
 
       assert redirected_to(conn) == "/"
       refute get_flash(conn, :error)
     end
 
     test "does not confirm email with invalid token", %{conn: conn, user: user} do
-      conn = post(conn, Routes.user_confirmation_path(conn, :update, "oops"))
+      conn = post(conn, routes().user_confirmation_path(conn, :update, "oops"))
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) =~ "User confirmation link is invalid or it has expired"
       refute Accounts.get_user!(user.id).confirmed_at

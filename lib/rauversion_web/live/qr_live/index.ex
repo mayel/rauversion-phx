@@ -1,7 +1,7 @@
 defmodule RauversionExtension.UI.QrLive.Index do
   use RauversionExtension.UI.Web, :live_view
   alias Rauversion.{PurchasedTickets, Repo}
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   @impl true
   def mount(%{"signed_id" => signed_id}, _session, socket) do

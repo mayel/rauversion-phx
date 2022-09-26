@@ -1,6 +1,6 @@
 defmodule RauversionWeb.FollowsLive.Index do
   use RauversionExtension.UI.Web, :live_view
-  on_mount RauversionWeb.UserLiveAuth
+  on_mount UserAuthLiveMount
 
   alias Rauversion.{Accounts, UserFollows}
 

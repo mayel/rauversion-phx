@@ -1,4 +1,4 @@
-defmodule RauversionWeb.UserLiveAuth do
+defmodule UserAuthLiveMount do
   # import Phoenix.LiveView
 
   def on_mount(:default, _params, session, socket) do

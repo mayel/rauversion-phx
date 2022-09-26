@@ -1,5 +1,5 @@
 defmodule RauversionWeb.ArticlesLive.Index do
-  use RauversionWeb, :live_view
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   @impl true

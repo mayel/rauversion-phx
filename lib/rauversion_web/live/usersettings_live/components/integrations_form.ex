@@ -1,5 +1,5 @@
 defmodule RauversionWeb.UsersettingsLive.IntegrationsForm do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.Repo
 
   @impl true

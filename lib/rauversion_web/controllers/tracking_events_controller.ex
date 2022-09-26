@@ -1,5 +1,5 @@
 defmodule RauversionWeb.TrackingEventsController do
-  use RauversionWeb, :controller
+  use RauversionExtension.UI.Web, :controller
 
   def show(conn, params = %{"track_id" => track_id}) do
     remote_ip = conn.remote_ip |> Tuple.to_list() |> Enum.join(".")

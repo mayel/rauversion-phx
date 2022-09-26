@@ -1,3 +1,3 @@
 defmodule RauversionWeb.ListingView do
-  use RauversionWeb, :view
+  use RauversionExtension.UI.Web, :view
 end

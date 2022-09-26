@@ -1,5 +1,5 @@
-defmodule RauversionWeb.QrLive.Index do
-  use RauversionWeb, :live_view
+defmodule RauversionExtension.UI.QrLive.Index do
+  use RauversionExtension.UI.Web, :live_view
   alias Rauversion.{PurchasedTickets, Repo}
   on_mount RauversionWeb.UserLiveAuth
 

@@ -3,7 +3,7 @@ defmodule RauversionWeb.LiveHelpers do
   import Phoenix.LiveView.Helpers
   import Phoenix.HTML.Form
   import RauversionWeb.ErrorHelpers
-  import RauversionWeb.Gettext
+  import RauversionExtension.UI.Gettext
   import Phoenix.HTML.Tag
 
   alias Phoenix.LiveView.JS
@@ -19,7 +19,7 @@ defmodule RauversionWeb.LiveHelpers do
 
       <.modal return_to={Routes.track_index_path(@socket, :index)}>
         <.live_component
-          module={RauversionWeb.TrackLive.FormComponent}
+          module={RauversionExtension.UI.TrackLive.FormComponent}
           id={@track.id || :new}
           title={@page_title}
           action={@live_action}

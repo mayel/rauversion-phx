@@ -1,5 +1,5 @@
 defmodule RauversionWeb.ProfileController do
-  use RauversionWeb, :controller
+  use RauversionExtension.UI.Web, :controller
 
   def show(conn, _params) do
     menu = [

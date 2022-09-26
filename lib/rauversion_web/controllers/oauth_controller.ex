@@ -1,5 +1,5 @@
 defmodule RauversionWeb.OAuthController do
-  use RauversionWeb, :controller
+  use RauversionExtension.UI.Web, :controller
   alias Rauversion.UserFromAuth
   alias RauversionWeb.UserAuth
   alias Rauversion.{Accounts, Repo}

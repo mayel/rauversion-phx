@@ -4,7 +4,7 @@ defmodule Rauversion.MixProject do
   def project do
     [
       app: :rauversion,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       # ++ [:cldr],
@@ -76,6 +76,13 @@ defmodule Rauversion.MixProject do
       {:ex_cldr_dates_times, "~> 2.0"},
       {:oauth2, "~> 1.0 or ~> 2.0"},
       {:ueberauth, "~> 0.7", override: true},
+      {
+        :rauversion_extension,
+        path: "forks/rauversion_extension",
+        # git: "https://github.com/mayel/rauversion.git",
+        override: true,
+        branch: "modular-extension"
+      },
       {
         :transbank,
         git: "https://github.com/elixircl/transbank-elixir.git", branch: "main"

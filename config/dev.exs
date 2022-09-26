@@ -10,9 +10,6 @@ config :rauversion, Rauversion.Repo,
   pool_size: 10,
   stacktrace: true
 
-config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
-config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

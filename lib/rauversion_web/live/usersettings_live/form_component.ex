@@ -1,5 +1,5 @@
 defmodule RauversionWeb.UsersettingsLive.FormComponent do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.Accounts
   alias RauversionWeb.UserAuth

@@ -1,5 +1,5 @@
 defmodule RauversionWeb.RepostLive.Show do
-  use RauversionWeb, :live_view
+  use RauversionExtension.UI.Web, :live_view
 
   alias Rauversion.Reposts
 

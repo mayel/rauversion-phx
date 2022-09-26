@@ -22,7 +22,7 @@
     <%= case @title do 
       # TODO: this is the same as all, but eventually will list all only the pinned ones
       "all" -> live_component(
-                  RauversionWeb.TrackLive.TrackListComponent,
+                  RauversionExtension.UI.TrackLive.TrackListComponent,
                   id: "all-track-#{@profile.id}",
                   profile: @profile,
                   title: @title,
@@ -32,7 +32,7 @@
                   current_user: assigns[:current_user]
                 )
       "tracks_all" -> live_component(
-                  RauversionWeb.TrackLive.TrackListComponent,
+                  RauversionExtension.UI.TrackLive.TrackListComponent,
                   id: "all-track-#{@profile.id}",
                   profile: @profile,
                   title: @title,
@@ -54,7 +54,7 @@
                 )
       "playlists" ->
                 live_component(
-                  RauversionWeb.PlaylistLive.PlaylistListComponent,
+                  RauversionExtension.UI.PlaylistLive.PlaylistListComponent,
                   id: "all-reposts-#{@profile.id}",
                   profile: @profile,
                   title: @title,
@@ -66,7 +66,7 @@
                 )
       "insights" ->
               live_component(
-                  RauversionWeb.InsightsLive.InsightComponent,
+                  RauversionExtension.UI.InsightsLive.InsightComponent,
                   id: "profile-insights-#{@profile.id}",
                   profile: @profile,
                   title: @title,

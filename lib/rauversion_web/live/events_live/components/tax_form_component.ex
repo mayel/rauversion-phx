@@ -1,5 +1,5 @@
 defmodule RauversionWeb.Live.EventsLive.Components.TaxFormComponent do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   @impl true
   def handle_event("validate", _event_params, socket) do

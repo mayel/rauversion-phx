@@ -2,7 +2,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
   # If you generated an app with mix phx.new --live,
   # the line below would be: use MyAppWeb, :live_component
   # use Phoenix.LiveComponent
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
   alias Rauversion.{Reposts, Repo}
 
   @impl true
@@ -109,7 +109,7 @@ defmodule RauversionWeb.RepostLive.RepostListComponent do
                 data-paginate-end={assigns.track_meta.total_pages == @page}>
                 <%= for track <- @tracks do %>
                   <.live_component
-                    module={RauversionWeb.TrackLive.TrackComponent}
+                    module={RauversionExtension.UI.TrackLive.TrackComponent}
                     id={"track-list-#{track.id}"}
                     track={track}
                     repost={nil}

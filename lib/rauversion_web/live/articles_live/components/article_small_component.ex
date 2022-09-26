@@ -1,5 +1,5 @@
 defmodule RauversionWeb.Live.ArticlesLive.ArticleSmallComponent do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def render(assigns) do
     ~H"""

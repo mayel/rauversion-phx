@@ -1,5 +1,5 @@
 defmodule RauversionWeb.ProfileView do
-  use RauversionWeb, :view
+  use RauversionExtension.UI.Web, :view
 
   # def render("show.html", params) do
   # end

@@ -1,5 +1,7 @@
 import Config
 
+config :rauversion, :app_name, System.get_env("APP_NAME", "rauversion")
+
 unless Mix.env() == :prod do
   Dotenv.load!()
 end
@@ -74,6 +76,9 @@ config :ueberauth, Ueberauth.Strategy.Stripe.OAuth,
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 if config_env() == :prod do
+
+  config :rauversion, :domain, System.get_env("HOST", "https://rauversion.com")
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
@@ -158,7 +163,9 @@ if config_env() == :prod do
 
 else
 
-    config :rauversion, Rauversion.Repo,
-      password: System.get_env("POSTGRES_PASSWORD", "postgres")
+  config :rauversion, :domain, System.get_env("HOST", "http://localhost:4000")
+
+  config :rauversion, Rauversion.Repo,
+    password: System.get_env("POSTGRES_PASSWORD", "postgres")
 
 end

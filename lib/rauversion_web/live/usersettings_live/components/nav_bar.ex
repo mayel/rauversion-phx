@@ -1,6 +1,6 @@
 defmodule RauversionWeb.UserSettingsLive.NavBar do
   # use Phoenix.Component
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def menu_items do
     [

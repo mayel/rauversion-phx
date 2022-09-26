@@ -1,5 +1,5 @@
 defmodule RauversionWeb.UsersettingsLive.NotificationsForm do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   def render(%{changeset: _changeset} = assigns) do
     notification_inputs = [

@@ -1,5 +1,5 @@
 defmodule RauversionWeb.Router do
-  use RauversionWeb, :router
+  use RauversionExtension.UI.Web, :router
 
   import RauversionWeb.UserAuth
 
@@ -13,7 +13,7 @@ defmodule RauversionWeb.Router do
     plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {RauversionWeb.LayoutView, :root}
+    plug :put_root_layout, {RauversionExtension.UI.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
@@ -24,7 +24,7 @@ defmodule RauversionWeb.Router do
     plug :accepts, ["html", "json"]
     plug :fetch_session
     # plug :fetch_live_flash
-    # plug :put_root_layout, {RauversionWeb.LayoutView, :root}
+    # plug :put_root_layout, {RauversionExtension.UI.LayoutView, :root}
     plug :put_secure_browser_headers
     # plug :fetch_current_user
   end
@@ -34,7 +34,7 @@ defmodule RauversionWeb.Router do
     # plug :fetch_session
     # plug :fetch_live_flash
     plug :put_secure_browser_headers
-    plug :put_new_layout, {RauversionWeb.LayoutView, :embed}
+    plug :put_new_layout, {RauversionExtension.UI.LayoutView, :embed}
   end
 
   pipeline :api do
@@ -62,17 +62,14 @@ defmodule RauversionWeb.Router do
 
   scope "/", RauversionWeb do
     pipe_through :browser_embed
-    get "/embed/:track_id", EmbedController, :show
-    get "/embed/:track_id/private", EmbedController, :private
 
-    get "/embed/sets/:playlist_id", EmbedController, :show_playlist
-    get "/embed/sets/:playlist_id/private", EmbedController, :private_playlist
-
-    post "/webhooks/stripe", WebhooksController, :create
   end
 
+  # import routes from extension
+  use RauversionExtension.UI.Routes
+
   # Other scopes may use custom stacks.
-  scope "/api", RauversionWeb do
+  scope "/api", RauversionExtension.UI do
     pipe_through :browser_api
     post "/tracks/:track_id/events", TrackingEventsController, :show
     get "/tracks/:track_id/events", TrackingEventsController, :show
@@ -122,6 +119,7 @@ defmodule RauversionWeb.Router do
 
   scope "/", RauversionWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
+
     get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
@@ -136,15 +134,11 @@ defmodule RauversionWeb.Router do
   scope "/", RauversionWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/tickets/qr/:signed_id", QrLive.Index, :index
-
     live "/users/settings", UserSettingsLive.Index, :profile
     live "/users/settings/email", UserSettingsLive.Index, :email
     live "/users/settings/security", UserSettingsLive.Index, :security
     live "/users/settings/notifications", UserSettingsLive.Index, :notifications
     live "/users/settings/integrations", UserSettingsLive.Index, :integrations
-
-    get "/oembed", OEmbedController, :create
 
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
@@ -153,94 +147,14 @@ defmodule RauversionWeb.Router do
     live "/articles/edit/:id", ArticlesLive.New, :edit
     live "/articles/:slug/edit", ArticlesLive.New, :edit
 
-    live "/events/mine", EventsLive.Index, :mine
-    live "/events/new", EventsLive.New, :new
-    live "/events/edit/:id", EventsLive.New, :edit
-    live "/events/:slug/edit", EventsLive.New, :edit
-
-    live "/events/:slug/payment_success", EventsLive.Show, :payment_success
-    live "/events/:slug/payment_failure", EventsLive.Show, :payment_fail
-    live "/events/:slug/payment_cancel", EventsLive.Show, :payment_cancel
-
-    live "/events/:slug/edit/schedule", EventsLive.New, :schedule
-    live "/events/:slug/edit/tickets", EventsLive.New, :tickets
-    live "/events/:slug/edit/order_form", EventsLive.New, :order_form
-    live "/events/:slug/edit/widgets", EventsLive.New, :widgets
-    live "/events/:slug/edit/tax", EventsLive.New, :tax
-    live "/events/:slug/edit/attendees", EventsLive.New, :attendees
-    live "/events/:slug/edit/sponsors", EventsLive.New, :sponsors
-
-    live "/tracks/new", TrackLive.New, :new
-    live "/tracks/:id/edit", TrackLive.Index, :edit
-
-    live "/tracks/:id/show/edit", TrackLive.Show, :edit
-
     live "/reposts/new", RepostLive.Index, :new
     live "/reposts/:id/edit", RepostLive.Index, :edit
 
     live "/reposts/:id/show/edit", RepostLive.Show, :edit
 
-    live "/playlists/new", PlaylistLive.Index, :new
-    live "/playlists/:id/edit", PlaylistLive.Index, :edit
-    live "/playlists/:id/show/edit", PlaylistLive.Show, :edit
+
   end
 
-  scope "/active_storage", RauversionWeb do
-    pipe_through [:active_storage]
-
-    # get "/blobs/proxy/:signed_id/*filename" => "active_storage/blobs/proxy#show", as: :rails_service_blob_proxy
-    get(
-      "/blobs/proxy/:signed_id/*filename",
-      ActiveStorage.Blobs.ProxyController,
-      :show
-    )
-
-    # get "/blobs/redirect/:signed_id/*filename" => "active_storage/blobs/redirect#show", as: :rails_service_blob
-    get(
-      "/blobs/redirect/:signed_id/*filename",
-      ActiveStorage.Blobs.RedirectController,
-      :show
-    )
-
-    # get("/blobs/:signed_id/*filename", ActiveStorage.Blob.ProxyController, :show)
-    # get "/blobs/:signed_id/*filename" => "active_storage/blobs/redirect#show"
-
-    get(
-      "/representations/redirect/:signed_blob_id/:variation_key/*filename",
-      ActiveStorage.Representations.RedirectController,
-      :show
-    )
-
-    get(
-      "/representations/proxy/:signed_blob_id/:variation_key/*filename",
-      ActiveStorage.Representations.ProxyController,
-      :show
-    )
-
-    # get "/representations/redirect/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show", as: :rails_blob_representation
-    # get "/representations/proxy/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/proxy#show", as: :rails_blob_representation_proxy
-    # get "/representations/:signed_blob_id/:variation_key/*filename" => "active_storage/representations/redirect#show"
-
-    # get  "/disk/:encoded_key/*filename" => "active_storage/disk#show", as: :rails_disk_service
-    # put  "/disk/:encoded_token" => "active_storage/disk#update", as: :update_rails_disk_service
-    get(
-      "/disk/:encoded_key/*filename",
-      ActiveStorage.DiskController,
-      :show
-    )
-
-    put(
-      "/disk/:encoded_token",
-      ActiveStorage.DiskController,
-      :update
-    )
-
-    post(
-      "/direct_uploads",
-      ActiveStorage.DirectUploadsController,
-      :create
-    )
-  end
 
   scope "/", RauversionWeb do
     pipe_through [:browser]
@@ -258,18 +172,9 @@ defmodule RauversionWeb.Router do
 
     live "/articles/:id", ArticlesLive.Show, :show
 
-    live "/events", EventsLive.Index, :index
-    live "/events/:id", EventsLive.Show, :show
-    live "/events/:id/tickets", TicketsLive.Index, :index
-
-    live "/tracks", TrackLive.Index, :index
-    live "/tracks/:id", TrackLive.Show, :show
-    live "/tracks/:id/private", TrackLive.Show, :private
     live "/reposts", RepostLive.Index, :index
     live "/reposts/:id", RepostLive.Show, :show
-    live "/playlists", PlaylistLive.Index, :index
-    live "/playlists/:id", PlaylistLive.Show, :show
-    live "/playlists/:id/private", PlaylistLive.Show, :private
+
 
     # post "/direct_uploads" => "active_storage/direct_uploads#create", as: :rails_direct_uploads
 
@@ -286,4 +191,5 @@ defmodule RauversionWeb.Router do
     live "/:username/tracks/popular", ProfileLive.Index, :popular
     live "/:username/insights", ProfileLive.Index, :insights
   end
+
 end

@@ -1,5 +1,5 @@
 defmodule RauversionWeb.ArticlesLive.CategoriesSectionComponent do
-  use RauversionWeb, :live_component
+  use RauversionExtension.UI.Web, :live_component
 
   alias Rauversion.{Posts}
 

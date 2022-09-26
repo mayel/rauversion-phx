@@ -1,5 +1,5 @@
-defmodule RauversionWeb.LayoutView do
-  use RauversionWeb, :view
+defmodule RauversionExtension.UI.LayoutView do
+  use RauversionExtension.UI.Web, :view
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.

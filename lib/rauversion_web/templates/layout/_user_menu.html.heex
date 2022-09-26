@@ -7,7 +7,7 @@
               <img class="h-12 w-auto" src={ Routes.static_path(@conn, "/images/logo.png")} alt="">
 
               <span>RAUVERSION</span> 
-              <% #= RauversionWeb.Gettext |> Gettext.get_locale %>
+              <% #= RauversionExtension.UI.Gettext |> Gettext.get_locale %>
               <% #= image_tag url_for(current_user.avatar), class: "h-8 w-auto" if current_user&.avatar&.persisted? %>
             <% end %>
           </div>

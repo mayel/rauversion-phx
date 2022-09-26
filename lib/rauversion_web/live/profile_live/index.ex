@@ -1,25 +1,32 @@
 defmodule RauversionWeb.ProfileLive.Index do
-  use RauversionWeb, :live_view
+  use RauversionExtension.UI.Web, :live_view
   on_mount RauversionWeb.UserLiveAuth
 
   alias Rauversion.{Accounts, Tracks, UserFollows}
 
   @impl true
   def mount(_params = %{"username" => id}, _session, socket) do
-    profile = Accounts.get_user_by_username(id)
+    with %{id: id} = profile <- Accounts.get_user_by_username(id) do
 
-    socket =
-      socket
-      |> assign(:profile, profile)
-      |> assign(
-        :user_follow,
-        get_follow_for_current_user(profile.id, socket.assigns.current_user)
-      )
-      |> assign(:share_track, nil)
+      socket =
+        socket
+        |> assign(:profile, profile)
+        |> assign(
+          :user_follow,
+          get_follow_for_current_user(id, socket.assigns.current_user)
+        )
+        |> assign(:share_track, nil)
 
-    Tracks.subscribe()
+        Tracks.subscribe()
 
-    {:ok, socket}
+        {:ok, socket}
+
+      else _ ->
+        {:ok, socket
+        |> put_flash(:error, "Profile not found")
+        |> push_redirect(to: "/")
+        }
+    end
   end
 
   defp get_follow_for_current_user(id, _current_user = %Accounts.User{id: current_user_id}) do
